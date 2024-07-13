@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html class="" lang="ru"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta name="robots" content="noai, noimageai">
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+
+    <link
+    rel="icon"
+    href='/favicon.png'
+/>
+<link
+    rel="shortcut icon"
+    href='/favicon.ico'
+    type="image/x-icon"
+/>
+<link
+    rel="apple-touch-icon"
+    href='/apple-touch-icon.png'
+/>
+
+    <link
+        rel="icon"
+        href='/logo.svg'
+        type="image/svg+xml"
+    />
+
+<title>
+        
+            Организация виртуальной лаборатории с использованием KVM  &ndash;
+        
+        gish350 blog
+    </title>
+
+    
+    <link href="/symbols-nerd-font/symbols-nerd-font.css" rel="stylesheet" integrity="sha512-lydow8GLOLlYNOtHlksNCmGWWCBsbIEtikXpHzfWqx78HLlyQZHOzyLwPpKol4Th6aCwLUXOfODVYgwrd3nwKQ=="/>
+    <link href="/jetbrains-mono/jetbrains-mono.css" rel="stylesheet" integrity="sha512-tJxlgL6v1Y7kFf+qB8SloaAMKnOAw6WouknxXtIjkBux9Y/9aX81EUWOJO8c/3l98DmjG8brr4to7zaez606Fg=="/>
+
+    
+    
+    <link type="text/css" rel="stylesheet" href=http://localhost:1313/css/styles.abbd6311bb4b6ca58f8e7398140529245ae0f6428b759fcd830742eee2619eabb900ba9914a9affb82aa9a16a9b9ea727bb315315a976a0db0e7513a5f12c504.css integrity="sha512-q71jEbtLbKWPjnOYFAUpJFrg9kKLdZ/NgwdC7uJhnqu5ALqZFKmv&#43;4Kqmhapuepye7MVMVqXag2w51E6XxLFBA==" />
+<meta name="author" content="Gabriele Musco" />
+
+    
+    
+        <meta name="description" content="на настройка лаборатории для исследования вредоносного ПО с использованием KVM. Так же, как и VirtualBox или VMWare, KVM через Spice предлагает гостевые дополнения, позволяющие переносить образцы ПО с хост-компьютера на виртуальные машины. В отличие от VirtualBox или VMWare, KVM позволяет модифицировать код QEMU, что обеспечивает создание более скрытных машин для анализа.
+Сетевая инфраструктура Возможность обеспечения виртуальной машины для анализа с доступом в интернет является важной составляющей полноценного анализа, поскольку многие современные вредоносные программы используют интернет-соединение для различных целей." />
+    
+
+<meta property="og:site_name"
+    content='gish350 blog' />
+
+    <meta property="og:title" content="Организация виртуальной лаборатории с использованием KVM" />
+    <meta property="og:type" content="article" />
+    
+    <meta
+        property="article:author" content="Gabriele Musco" />
+    <meta
+        property="article:published_time"
+        content='2024-07-11T21:14:26Z&#43;1000' />
+    
+    <meta property="og:url" content="http://localhost:1313/posts/tutorial_kvm/" />
+    
+    
+    <meta property="og:image"
+        content="http://localhost:1313/icon512.png" />
+    
+        <meta property="og:description" content="В этой статье показана настройка лаборатории для исследования вредоносного ПО с использованием KVM. Так же, как и VirtualBox или VMWare, KVM через Spice предлаг" />
+    
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:domain"
+      content='localhost:1313'
+/>
+<meta property="twitter:url" content="http://localhost:1313/posts/tutorial_kvm/" />
+
+
+    <meta name="twitter:title" content="Организация виртуальной лаборатории с использованием KVM" />
+    
+    
+    
+    <meta name="twitter:image"
+        content="http://localhost:1313/icon512.png" />
+    
+        <meta name="twitter:description" content="В этой статье показана настройка лаборатории для исследования вредоносного ПО с использованием KVM. Так же, как и VirtualBox или VMWare, KVM через Spice предлаг" />
+    
+
+<link rel="manifest" href="/manifest/index.json" />
+</head>
+
+
+<body>
+        <div id="baseContainer"><header class="">
+<div class="titleAndSearchContainer">
+        <div id="titleContainer">
+            
+                <a class="unstyledLink" href="/">
+                    <img src='/logo.svg' alt='Logo'/>
+                </a>
+            
+            <div class="rightOfLogo">
+                <div class="titleAndHamburger">
+                    <h1>
+                        <a class="unstyledLink" href="/">gish350 blog</a>
+                        
+                    </h1>
+                    
+                </div>
+                <div id="wide_nav"><nav>
+    
+    <ul id="main-nav">
+        <li><a href="/">Home</a></li>
+        
+            <li><a href="/posts/">Posts</a></li>
+        
+        
+        
+        
+        
+        
+            <li><a href="/about/">About</a></li>
+        
+        
+            <li><a href="/tags/">Tags</a></li>
+        
+        
+    </ul>
+</nav>
+</div>
+            </div>
+        </div>
+        <div class="search">
+    <input id="searchbar" type="text" placeholder='Search' />
+    <span class="nerdlink" onclick="newSearch();">&#xf002;</span>
+</div>
+<script>
+    function newSearch() {
+        let term = searchbar.value.trim();
+        if (!term) return;
+        location.href = `/search/?q=${term}`;
+    }
+    searchbar.onkeyup = (ev) => {if (ev.keyCode == 13) newSearch()};
+</script>
+
+    </div>
+    <div id="links">
+        
+        
+        <a
+    
+        rel="noreferrer"
+    
+    target="_blank"
+    class="nerdlink"
+    href="https://github.com/cec12">
+    
+    
+        &#xf09b;
+    
+    <span>
+        GitHub
+    </span>
+</a>
+<a
+    
+        rel="noreferrer"
+    
+    target="_blank"
+    class="nerdlink"
+    href="mailto:a.tseeganov@gmail.com">
+    
+    
+        &#xf6ed;
+    
+    <span>
+        email
+    </span>
+</a>
+
+    </div>
+    
+
+</header>
+<div id="contentContainer">
+                <div id="content">
+                    <main>
+<article class="card single">
+    
+        <h1>Организация виртуальной лаборатории с использованием KVM</h1>
+    
+    
+        <p class="date">
+            <span title='Date'> </span>
+    2024-07-11
+
+</p>
+    
+    
+    
+    
+    <div><p>В этой статье показана настройка лаборатории для исследования вредоносного ПО с использованием KVM. Так же, как и VirtualBox или VMWare, KVM через Spice предлагает гостевые дополнения, позволяющие переносить образцы ПО с хост-компьютера на виртуальные машины. В отличие от VirtualBox или VMWare, KVM позволяет модифицировать код QEMU, что обеспечивает создание более скрытных машин для анализа.</p>
+<h2 id="сетевая-инфраструктура">Сетевая инфраструктура</h2>
+<p>Возможность обеспечения виртуальной машины для анализа с доступом в интернет является важной составляющей полноценного анализа, поскольку многие современные вредоносные программы используют интернет-соединение для различных целей. Однако предоставление доступа к интернету требует дополнительных мер безопасности для защиты сети.</p>
+<blockquote>
+<p>[!TIP]</p>
+</blockquote>
+<blockquote>
+<p>Следует поместить хост-машину в DMZ. Большинство домашних маршрутизаторов обладают настройками DMZ.</p>
+</blockquote>
+<p>Общая схема сети представлена ниже:</p>
+<pre tabindex="0"><code>  ┌─────────┐
+  │Интернет │
+  └────┬────┘
+       │
+┌──────┴───────┐
+│Хост-машина   │ Виртуальная машина (KVM) в DMZ
+└──────┬───────┘
+       │
+    ┌──┴──┐
+    │NAT  │ (по умолчанию)
+    └──┬──┘
+       │
+   ┌───┴────┐ ┌─────────┐
+   │PFSense ├─┤Изолиров.│ LAN 10.0.1.1/24 (vmbr0)
+   └────────┘ └────┬────┘
+	         │
+	      ┌──┴───┐
+	      │Remnux│ Статический анализ и перехват трафика
+	      └──┬───┘
+	         │
+	     ┌───┴─────┐
+	     │Изолир.  │ Аналитическая LAN 10.0.2.1/24 (vmbr1)
+	     └──┬──────┤
+	        │      │
+         ┌────────┴───┐ ┌┴───────┐
+         │Аналит. ВМ  │ │Windows │ Динамический анализ
+         └────────────┘ └────────┘
+</code></pre><p><strong>Динамический анализ</strong> будет проводиться на машине  <strong>Windows</strong>. Использование <strong>Linux</strong> (Remnux) позволит нам применять статические аналитические инструменты и осуществлять перехват зашифрованного трафика благодаря расшифровке <strong>TLS-секретов</strong>. Также мы можем создавать временные <strong>C2-соединения</strong> для воспроизведения сценариев атаки.
+В связи с особыми соображениями безопасности, сеть настроена следующем образом:</p>
+<ul>
+<li><strong>Remnux</strong> и <strong>Windows</strong> взаимодействуют через внутреннюю сеть (internal network).</li>
+<li><strong>Remnux</strong> получает выход в интернет через <strong>pfSense</strong>, выступающий как маршрутизатор и брандмауэр.</li>
+<li>С помщью <strong>NAT</strong> и <strong>IP Forwarding</strong> с <strong>Remnux</strong>-машины передается трафик <strong>Windows</strong>-машине через <strong>tun-интерфейс</strong>. Предпологается использование <strong>VPN - соединения</strong> во избежание утечки реальных ip-адресов.</li>
+</ul>
+<blockquote>
+<p>[!NOTE]
+Без включённого VPN на машине Remnux, в Windows не будет доступа к интернету.</p>
+</blockquote>
+<p>Далее представлен процесс установки необходимых компонентов.</p>
+<h2 id="установка-kvm">Установка KVM</h2>
+<ul>
+<li>В первую очередь необходимо проверить, включена ли виртуализация на вашем хосте.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>grep -Po <span style="color:#e6db74">&#39;(vmx|svm)[^\x20]+&#39;</span> /proc/cpuinfo | sort | uniq <span style="color:#75715e"># Для хост-машины</span>
+</span></span><span style="display:flex;"><span>cat /sys/module/kvm_intel/parameters/nested              <span style="color:#75715e"># Влож. виртуализ. (intel)</span>
+</span></span><span style="display:flex;"><span>cat /sys/module/kvm_amd/parameters/nested                <span style="color:#75715e"># Влож. виртуализ. (amd)</span>
+</span></span></code></pre></div><ul>
+<li>Включаем вложенную виртуализацию (необязательно)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo nano /etc/modprobe.d/kvm.conf <span style="color:#75715e"># Файл конфигурации вложенной виртуализации</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Добавьте следующую конфигурацию</span>
+</span></span><span style="display:flex;"><span>: <span style="color:#e6db74">&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">options kvm_intel nested=1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;</span> <span style="color:#75715e"># сохраните и перезагрузите</span>
+</span></span><span style="display:flex;"><span>sudo reboot
+</span></span></code></pre></div><p>Если после выполнения предыдущей команды есть какой-либо вывод, значит виртуализация включена, в противном случае включите её в BIOS и попробуйте снова.</p>
+<blockquote>
+<p>[!WARNING]
+Использование вложенной виртуализации приведёт к значительным потерям производительности. Если у вас слабый ПК, используйте Linux с KVM на голом железе.</p>
+</blockquote>
+<ul>
+<li>Устанавливаем зависимости</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt update
+</span></span><span style="display:flex;"><span>sudo apt install -y virt-manager qemu-kvm build-essential python-is-python3
+</span></span></code></pre></div><ul>
+<li>Проверим, запущен ли <strong>libvirtd</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl enable libvirtd
+</span></span><span style="display:flex;"><span>sudo systemctl start libvirtd
+</span></span></code></pre></div><ul>
+<li>Добавим текущего пользователя в <strong>libvirtd</strong> - группу</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo usermod -a -G libvirt $USER
+</span></span></code></pre></div><ul>
+<li>Установим модифицированную версию <a href="https://www.seabios.org/SeaBIOS">SeaBios</a> (изменен <strong>/src/config.h</strong> на более реалистичные значения)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/c3rb3ru5d3d53c/seabios.git
+</span></span><span style="display:flex;"><span>cd seabios/
+</span></span><span style="display:flex;"><span>make
+</span></span><span style="display:flex;"><span>sudo cp /usr/share/seabios/bios.bin /usr/share/seabios/bios.bin.bak
+</span></span><span style="display:flex;"><span>sudo cp out/bios.bin /usr/share/seabios/bios.bin
+</span></span></code></pre></div><ul>
+<li>Если вы хотите чтобы <strong>virt-manager</strong> имел доступ к вашей домашней директории, установите следующее разрешение (этот пункт необязателен)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo setfacl -m u:libvirt-qemu:rx /home/$USER
+</span></span></code></pre></div><ul>
+<li>Выполните перезагрузку</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo reboot
+</span></span></code></pre></div><h2 id="создание-виртуальных-машин">Создание виртуальных машин</h2>
+<p>В этой секции показано как создавать виртуальные машины KVM с использованием <strong>virt-manager</strong>.</p>
+<h3 id="создание-виртуальной-сети">Создание виртуальной сети</h3>
+<p><strong>Настройка PFSense LAN</strong></p>
+<ol>
+<li>Откройте <strong>Edit</strong>.</li>
+<li>Перейдите к <strong>Connection Details</strong>.</li>
+<li>Нажмите на <strong>+</strong> для добавления новой конфигурации.</li>
+<li>Выберите <strong>vmbr0 Isolated (PFSense LAN)</strong>.</li>
+<li>Отключите <strong>IPV4</strong> и <strong>IPv6</strong> (настройки  PFSense).</li>
+</ol>
+<p><strong>Настройка Analysis LAN</strong></p>
+<ol>
+<li>Откройте <strong>Edit</strong>.</li>
+<li>Перейдите к <strong>Connection Details</strong>.</li>
+<li>Нажмите на <strong>+</strong> для добавления новой конфигурации.</li>
+<li>Выберите <strong>vmbr1 Isolated (Analysis LAN)</strong>.</li>
+<li>Отключите <strong>IPV4</strong> и <strong>IPv6</strong> (настройки  Remnux).</li>
+</ol>
+<h3 id="создание-виртуальной-машины-с-pfsense">Создание виртуальной машины с PFSense</h3>
+<p>Основная цель создания машины с PFSense - это простой способ управления брандмауэром между сетью и интернетом.</p>
+<ul>
+<li>Скачать PFSense:  <a href="https://www.pfsense.org/download/">https://www.pfsense.org/download/</a></li>
+<li>Создадим образ <strong>qcow2</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>qemu-img create -f qcow2 pfsense.qcow2 16G
+</span></span></code></pre></div><ul>
+<li>
+<p>Создадим виртуальную машину</p>
+<ol>
+<li>Импортируем существующий образ диска</li>
+<li>Выберем <strong>pfsense.qcow2</strong> в качестве хранилища</li>
+<li>В качестве ОС выберем <strong>FreeBSD</strong></li>
+<li>Название: <strong>pfsense</strong></li>
+</ol>
+</li>
+<li>
+<p>Настроим конфигурацию</p>
+<ol>
+<li>Сетевая карта - NAT</li>
+<li>Add Hardware -&gt; Network -&gt; vmbr0 (Сеть PFSense)</li>
+<li>Add Hardware -&gt; Network -&gt; CDROM Device -&gt; Manager -&gt; PFSense ISO</li>
+<li>Boot Options -&gt; Установим CDROM device как первый на этапе загрукзи ОС</li>
+</ol>
+</li>
+<li>
+<p>Запустим машину</p>
+</li>
+<li>
+<p>В настройках PFSense установим LAN <strong>10.0.1.1/24</strong></p>
+</li>
+</ul>
+<h3 id="создание-виртуальной-машины-remnux-ubuntu-2404">Создание виртуальной машины Remnux (Ubuntu 24.04)</h3>
+<p>Основная цель этой виртуальной машины -  проводить статический анализ бинарных файлов с  помощью таких инструментов как IDA, Ghidra, Cutter и.т.д, а также служить шлюзом для подсети анализа. Это дает полный контроль над серверами DNS и DHCP для перехвата трафика и других операций.</p>
+<blockquote>
+<p>[!NOTE]
+Официальные дистрибутивы Remnux обновляются довольно редко. Рекомендуется скачать последний LTS-образ Ubuntu и использовать Remnux в качестве контейнера.</p>
+</blockquote>
+<ul>
+<li>Скачать <a href="https://releases.ubuntu.com/noble/">https://releases.ubuntu.com/noble/</a></li>
+<li>Создадим образ диска</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>qemu-img create -f qcow2 remnux.qcow2 40G
+</span></span></code></pre></div><ul>
+<li>Создадим новую виртуальную машину
+<ol>
+<li>Импортируем существующий образ диска</li>
+<li>В качестве хранилище выберем <strong>remnux.qcow2</strong></li>
+<li>В качестве ОС выберем Ubuntu</li>
+</ol>
+</li>
+<li>Настроим конфигурацию перед установкой
+<ul>
+<li>Установим первый сетевой интерфейс как <strong>vmbr0</strong> (Сеть PFSense)</li>
+<li>Add Hardware -&gt; Network -&gt; <strong>vmbr1</strong> (сеть анализа)</li>
+<li>Add Hardware -&gt; Storage -&gt; CDROM Device-&gt; Manage -&gt; Ubuntu ISO Image</li>
+<li>Boot Options -&gt; Установим CDROM device как первый при загрузке</li>
+</ul>
+</li>
+<li>Запустим ВМ</li>
+<li>Установим зависимости</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt update
+</span></span><span style="display:flex;"><span>sudo apt install dnsmasq isc-dhcp-server openvpn docker.io spice-vdagent
+</span></span><span style="display:flex;"><span>sudo systemctl enable spice-vdagent
+</span></span><span style="display:flex;"><span>sudo systemctl enable docker
+</span></span><span style="display:flex;"><span>sudo usermod -a -G docker $USER
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># выйти и зайти снова</span>
+</span></span></code></pre></div><ul>
+<li>Создадим <strong>remnux</strong> - контейнер</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run --rm -it -v <span style="color:#66d9ef">$(</span>pwd<span style="color:#66d9ef">)</span>:$HOME -u remnux remnux/remnux-distro:focal bash
+</span></span></code></pre></div><ul>
+<li>Настроим интерфейсы</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo nano /etc/netplan/01-network-manager-all.yaml
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Заменить содержимое следующим</span>
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">&#39;network:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  version: 2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  renderer: networkd
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  ethernets:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    enp1s0:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      dhcp4: yes
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    enp7s0:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      addresses:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        - 10.0.2.1/24
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;</span>
+</span></span></code></pre></div><ul>
+<li>Отключим конфликты <strong>dnsmasq</strong> с <strong>systemd-resolved</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo nano /etc/systemd/resolved.conf
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Добавить DNSStubListener=no в конец файла и сохранить</span>
+</span></span><span style="display:flex;"><span>sudo systemctl restart systemd-resolved
+</span></span><span style="display:flex;"><span>sudo systemctl enable dnsmasq
+</span></span><span style="display:flex;"><span>sudo systemctl restart dnsmasq
+</span></span></code></pre></div><ul>
+<li>Настроим dhcp - сервер для сети анализа</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo nano /etc/dhcp/dhcpd.conf
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Добавить следющее в файл конфигурации</span>
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">&#39;subnet 10.0.2.0 netmask 255.255.255.0 {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   option domain-name &#34;mydomain.org&#34;;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   default-lease-time 600;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   max-lease-time 7200;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   option routers 10.0.2.1;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   option subnet-mask 255.255.255.0;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   option broadcast-address 10.0.2.255;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   option domain-name-servers 10.0.2.1;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   range 10.0.2.2 10.0.2.254;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">}&#39;</span>
+</span></span><span style="display:flex;"><span>sudo systemctl enable isc-dhcp-server
+</span></span><span style="display:flex;"><span>sudo systemctl restart isc-dhcp-serve
+</span></span></code></pre></div><ul>
+<li>Настроим firewall PFSense.
+<ol>
+<li>Перейдем по адресу https://10.0.1.1  и авторизуемся <strong>(admin:pfsense)</strong></li>
+<li>Добавим правила, запрещающие доступ из <strong>LAN</strong> в <strong>192.168.0.1/24</strong></li>
+<li>Применим изменения</li>
+</ol>
+</li>
+<li>Настроим internet forwarding</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo iptables -t nat -A POSTROUTING -o tun0 -j MASQUERADE <span style="color:#75715e"># </span>
+</span></span><span style="display:flex;"><span>sudo apt install iptables-persistent <span style="color:#75715e"># &#34;Yes&#34; в обоих случаях</span>
+</span></span><span style="display:flex;"><span>sudo nano /etc/sysctl.conf <span style="color:#75715e"># Убрать комментарий с net.ipv4.ip_forward=1</span>
+</span></span><span style="display:flex;"><span>sudo sysctl -w net.ipv4.ip_forward<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><ul>
+<li>Создадим скрипт, позволяющий запускать VPN</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nano vpn.sh
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Добавить след. инструкции и сохранить</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">#!/usr/bin/env bash
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">openvpn --daemon --config VPNJantit_All-servers_UDP-443.ovpn
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;</span>
+</span></span><span style="display:flex;"><span>chmod +x vpn.sh
+</span></span><span style="display:flex;"><span>sudo ./vpn.sh
+</span></span></code></pre></div><ul>
+<li>Установим утилиту для просмотра https трафика <strong>MITMProxy</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt update
+</span></span><span style="display:flex;"><span>sudo apt install -y wireshark tshark <span style="color:#75715e"># Yes</span>
+</span></span><span style="display:flex;"><span>sudo usermod -a -G wireshark $USER   <span style="color:#75715e"># Выйти и зайти снова</span>
+</span></span><span style="display:flex;"><span>wget https://snapshots.mitmproxy.org/8.1.0/mitmproxy-8.1.0-linux.tar.gz
+</span></span><span style="display:flex;"><span>tar -xzvf mitmproxy-8.1.0-linux.tar.gz
+</span></span><span style="display:flex;"><span>sudo mv mitmdump /usr/bin/
+</span></span><span style="display:flex;"><span>sudo mv mitmproxy /usr/bin/
+</span></span><span style="display:flex;"><span>sudo mv mitmweb /usr/bin/
+</span></span><span style="display:flex;"><span>wget https://gist.githubusercontent.com/c3rb3ru5d3d53c/d9eb9d752882fcc630d338a6b2461777/raw/f56cbef4b98c7bad8f265534eabf696923b649a2/mitmpcap
+</span></span><span style="display:flex;"><span>chmod +x mitmpcap
+</span></span><span style="display:flex;"><span>sudo mv mitmpcap /usr/bin/
+</span></span><span style="display:flex;"><span>wget https://gist.githubusercontent.com/c3rb3ru5d3d53c/3bc8041a182467ccae0207394c1e16b3/raw/33bf201da721ae8f8dc057480221a3c6612e7c11/mitmhttp
+</span></span><span style="display:flex;"><span>chmod +x mitmhttp
+</span></span><span style="display:flex;"><span>sudo mv mitmhttp /usr/bin/
+</span></span><span style="display:flex;"><span>sudo mkdir /root/.mitmproxy
+</span></span></code></pre></div><p>После этого можно перезапустить машину и использовать интернет.</p>
+<h3 id="создание-виртуальной-машины-windows">Создание виртуальной машины Windows</h3>
+<p>Эта ВМ будет находиться в сети анализа, основная её задача  - динамический анализ исполняемых файлов (Отладка, просмотр API - вызовов и т.д.).</p>
+<blockquote>
+<p>[!WARNING]
+При установке Windows необходимо убедиться что загрузочным диском является <strong>VirtIO</strong></p>
+</blockquote>
+<ul>
+<li>Скачаем <a href="https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso">VirtIO ISO</a></li>
+<li>Создадим образ диска</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>qemu-img create -f qcow2 windows.qcow2 128G
+</span></span></code></pre></div><ul>
+<li>
+<p>Создадим новую виртуальную машину</p>
+<ol>
+<li>Импортируем существующий образ диска</li>
+<li>Выберем  <strong>windows.qcow2</strong> в качестве хранилища</li>
+<li>Выберем Windows в качестве ОС</li>
+</ol>
+</li>
+<li>
+<p>Настроим конфигурацию перед установкой</p>
+<ol>
+<li>Установим первый сетевой интерфейс как <strong>vmbr1</strong> (Сеть анализа)</li>
+<li>Add Hardware -&gt; Storage -&gt; CDROM Device-&gt; Manage -&gt; Windows ISO Image</li>
+<li>Add Hardware -&gt; Storage CDROM Device -&gt; Manage -&gt; VirtIO ISO</li>
+<li>Boot Options -&gt; Установим CDROM device как первый при загрузке</li>
+<li>Извлечем SATA диск и заменим на VirtIO (windows.qcow2)</li>
+</ol>
+</li>
+<li>
+<p>Запустим установку</p>
+</li>
+<li>
+<p>Во время установки Windows диск VirtIO не будет отображаться, пока вы не перейдете к ISO-образу VirtIO и не выберете папку с драйверами для вашей версии Windows. После завершения вы можете продолжить установку.</p>
+</li>
+<li>
+<p>После установки Windows откройте &ldquo;Диспетчер устройств&rdquo; и найдите все драйверы со знаками вопроса, затем обновите их, используя CD-ROM с ISO-образом VirtIO.</p>
+</li>
+<li>
+<p>Скачайте и установите <a href="https://www.spice-space.org/download/windows/spice-guest-tools/spice-guest-tools-latest.exe">Spice Guest Tools</a></p>
+</li>
+<li>
+<p>Перезагрузите ВМ
+После того как вы завершите все необходимые шаги, рекомендуется удалить CD-ROM привод для драйверов VirtIO.</p>
+</li>
+</ul>
+<h3 id="дешифрование-tls---сертификатов">Дешифрование TLS - сертификатов</h3>
+<p>Этот раздел о том, как настроить дешифрование TLS на виртуальной машине Remnux для дешифровки TLS и просмотра секретов и pcap-файлов с аналитической сети (при условии, что устройства имеют установленный корневой сертификат CA).</p>
+<p>На Remnux - машине выполним</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo mitmhttp -i &lt;analysis-network-interface&gt; --enable
+</span></span><span style="display:flex;"><span>mitmproxy --mode transparent --listen-host 0.0.0.0 --listen-port <span style="color:#ae81ff">8080</span>
+</span></span></code></pre></div><p>На машине Windows откроем браузер и перейдем на сайт <strong>mitm.it</strong>, затем следуем инструкциям установки.
+Ручная установка:</p>
+<ol>
+<li>На веб-странице скачайте сертификат для Windows.</li>
+<li>Выберете файл P12, чтобы начать мастер импорта.</li>
+<li>Выберите расположение хранилища сертификатов. Это определяет, кто будет доверять сертификату — только текущий пользователь  или все пользователи. Нажмите &ldquo;Далее&rdquo;.</li>
+<li>Нажмите &ldquo;Далее&rdquo; снова.</li>
+<li>Оставьте поле пароля пустым и нажмите &ldquo;Далее&rdquo;.</li>
+<li>Выберите &ldquo;Разместить все сертификаты в следующем хранилище&rdquo;, затем нажмите &ldquo;Обзор&rdquo; и выберите &ldquo;Доверенные корневые центры сертификации&rdquo;. Нажмите &ldquo;ОК&rdquo; и &ldquo;Далее&rdquo;.</li>
+<li>Нажмите &ldquo;Завершить&rdquo;.</li>
+<li>Нажмите &ldquo;Да&rdquo;, чтобы подтвердить диалоговое окно предупреждения.</li>
+</ol>
+<p>Автоматическая установка:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>certutil.exe -addstore root mitmproxy-ca-cert.cer
+</span></span></code></pre></div><p>В вашем браузере перейдите на <a href="https://example.com/">https://example.com</a>, чтобы проверить успешное дешифрование в интерфейсе mitmproxy.
+Если вышеуказанные шаги были успешными, теперь вы можете использовать инструмент mitmpcap для просмотра трафика в реальном времени с помощью mitmproxy, а также использовать его для захвата TLS-секретов и pcap для последующего анализа.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mitmpcap -i enp7s0 -w dump.pcap -m transparent -p <span style="color:#ae81ff">8080</span> -s secrets.txt -v <span style="color:#ae81ff">1</span> -f libpcap
+</span></span></code></pre></div><p>Как только вы закончите захват, нажмите Q, а затем Y для выхода из mitmproxy. После этого вы должны заметить, что у вас есть файлы dump.pcap и secrets.txt. Следующие шаги о том, как использовать Wireshark для анализа вашего захвата.</p>
+<ol>
+<li>Откройте dump.pcap в Wireshark.</li>
+<li>Перейдите в меню Редактировать -&gt; Настройки -&gt; Протоколы -&gt; TLS -&gt; Имя файла журнала (предварительного) основного секрета, нажмите Обзор -&gt; выберите secrets.txt.</li>
+<li>В строке фильтра введите http и нажмите Enter.<br>
+Теперь у вас должен быть расшифрованный TLS-трафик.
+Как только вы завершите захват трафика и больше хотите остановить перехват, отключите перенаправление, выполнив следующее</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo mitmhttp -i &lt;analysis-network-interface&gt; --disable
+</span></span></code></pre></div></div>
+</article>
+
+
+
+    <script
+        defer
+        src="https://example.com/js/commento.js"
+        data-no-fonts="true"
+    ></script>
+    <div id="commento"></div>
+
+
+
+
+                    </main><footer>
+    <hr />
+
+<p><small>
+        2024 &copy; Some copyright notice - <a href="https://example.com/license">my license</a>
+    </small></p>
+    <p><small>
+        <a href='https://gitlab.com/gabmus/hugo-ficurinia'>Ficurinia theme</a> for <a href='https://gohugo.io'>Hugo</a> by <a href='https://gabmus.org'>Gabriele Musco</a>. Licensed under <a href='https://www.gnu.org/licenses/agpl-3.0.html'>GNU AGPLv3</a>.
+    </small></p>
+</footer>
+</div>
+            </div>
+        </div>
+    
+        <script
+            async
+            defer
+            data-domain="example.com"
+            src="https://something.com/..."
+        ></script>
+    
+
+
+    
+        <script
+            async
+            defer
+            data-website-id="example-tracking-code"
+            src="https://something.com/..."
+        ></script>
+    
+
+
+</body>
+</html>
