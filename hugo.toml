@@ -124,7 +124,7 @@ summaryLength = 70  # number of words for article summaries
     enableRelatedArticles = false
     relatedArticlesNum = 2  # how many related articles to show
     randomRelated = false  # sorts related articles in random order (randomized at built time)
-
+    googleAnalytics = "G-7D005ME6KK"
 [menu]
     # these links will be added to the main navigation menu, sorted by weight
     # other elements in this menu are added automatically from the "pages" folder
