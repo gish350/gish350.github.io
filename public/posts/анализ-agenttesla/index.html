@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html class="" lang="ru"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta name="robots" content="noai, noimageai">
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+
+    <link
+    rel="icon"
+    href='/favicon.png'
+/>
+<link
+    rel="shortcut icon"
+    href='/favicon.ico'
+    type="image/x-icon"
+/>
+<link
+    rel="apple-touch-icon"
+    href='/apple-touch-icon.png'
+/>
+
+    <link
+        rel="icon"
+        href='/logo.svg'
+        type="image/svg+xml"
+    />
+
+<title>
+        
+            Анализ AgentTesla  &ndash;
+        
+        gish350 blog
+    </title>
+
+    
+    <link href="/symbols-nerd-font/symbols-nerd-font.css" rel="stylesheet" integrity="sha512-lydow8GLOLlYNOtHlksNCmGWWCBsbIEtikXpHzfWqx78HLlyQZHOzyLwPpKol4Th6aCwLUXOfODVYgwrd3nwKQ=="/>
+    <link href="/jetbrains-mono/jetbrains-mono.css" rel="stylesheet" integrity="sha512-tJxlgL6v1Y7kFf+qB8SloaAMKnOAw6WouknxXtIjkBux9Y/9aX81EUWOJO8c/3l98DmjG8brr4to7zaez606Fg=="/>
+
+    
+    
+    <link type="text/css" rel="stylesheet" href=http://localhost:1313/css/styles.abbd6311bb4b6ca58f8e7398140529245ae0f6428b759fcd830742eee2619eabb900ba9914a9affb82aa9a16a9b9ea727bb315315a976a0db0e7513a5f12c504.css integrity="sha512-q71jEbtLbKWPjnOYFAUpJFrg9kKLdZ/NgwdC7uJhnqu5ALqZFKmv&#43;4Kqmhapuepye7MVMVqXag2w51E6XxLFBA==" />
+<meta name="author" content="Gabriele Musco" />
+
+    
+    
+        <meta name="description" content="— это тип вредоносного ПО, известный как Remote Access Trojan (RAT) и кейлоггер. Оно активно используется злоумышленниками для кражи конфиденциальной информации с заражённых систем.
+Общие сведения 1. Тип: Remote Access Trojan (RAT) и кейлоггер
+2. Основные характеристики:
+Шпионские возможности: AgentTesla способен перехватывать и записывать нажатия клавиш, делать скриншоты, захватывать буфер обмена и собирать данные из различных приложений. Кража данных: Вредоносное ПО часто нацелено на кражу данных аутентификации из веб-браузеров, почтовых клиентов и других приложений." />
+    
+
+<meta property="og:site_name"
+    content='gish350 blog' />
+
+    <meta property="og:title" content="Анализ AgentTesla" />
+    <meta property="og:type" content="article" />
+    
+    <meta
+        property="article:author" content="Gabriele Musco" />
+    <meta
+        property="article:published_time"
+        content='2024-08-04T21:14:26Z&#43;1000' />
+    
+    <meta property="og:url" content="http://localhost:1313/posts/%D0%B0%D0%BD%D0%B0%D0%BB%D0%B8%D0%B7-agenttesla/" />
+    
+    
+    <meta property="og:image"
+        content="http://localhost:1313/icon512.png" />
+    
+        <meta property="og:description" content="Введение AgentTesla — это тип вредоносного ПО, известный как Remote Access Trojan (RAT) и кейлоггер. Оно активно используется злоумышленниками для кражи конфиде" />
+    
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:domain"
+      content='localhost:1313'
+/>
+<meta property="twitter:url" content="http://localhost:1313/posts/%D0%B0%D0%BD%D0%B0%D0%BB%D0%B8%D0%B7-agenttesla/" />
+
+
+    <meta name="twitter:title" content="Анализ AgentTesla" />
+    
+    
+    
+    <meta name="twitter:image"
+        content="http://localhost:1313/icon512.png" />
+    
+        <meta name="twitter:description" content="Введение AgentTesla — это тип вредоносного ПО, известный как Remote Access Trojan (RAT) и кейлоггер. Оно активно используется злоумышленниками для кражи конфиде" />
+    
+
+<link rel="manifest" href="/manifest/index.json" />
+</head>
+
+
+<body>
+        <div id="baseContainer"><header class="">
+<div class="titleAndSearchContainer">
+        <div id="titleContainer">
+            
+                <a class="unstyledLink" href="/">
+                    <img src='/logo.svg' alt='Logo'/>
+                </a>
+            
+            <div class="rightOfLogo">
+                <div class="titleAndHamburger">
+                    <h1>
+                        <a class="unstyledLink" href="/">gish350 blog</a>
+                        
+                    </h1>
+                    
+                </div>
+                <div id="wide_nav"><nav>
+    
+    <ul id="main-nav">
+        <li><a href="/">Home</a></li>
+        
+            <li><a href="/posts/">Posts</a></li>
+        
+        
+        
+        
+        
+        
+            <li><a href="/about/">About</a></li>
+        
+        
+            <li><a href="/tags/">Tags</a></li>
+        
+        
+    </ul>
+</nav>
+</div>
+            </div>
+        </div>
+        <div class="search">
+    <input id="searchbar" type="text" placeholder='Search' />
+    <span class="nerdlink" onclick="newSearch();">&#xf002;</span>
+</div>
+<script>
+    function newSearch() {
+        let term = searchbar.value.trim();
+        if (!term) return;
+        location.href = `/search/?q=${term}`;
+    }
+    searchbar.onkeyup = (ev) => {if (ev.keyCode == 13) newSearch()};
+</script>
+
+    </div>
+    <div id="links">
+        
+        
+        <a
+    
+        rel="noreferrer"
+    
+    target="_blank"
+    class="nerdlink"
+    href="https://github.com/gish350">
+    
+    
+        &#xf09b;
+    
+    <span>
+        GitHub
+    </span>
+</a>
+<a
+    
+        rel="noreferrer"
+    
+    target="_blank"
+    class="nerdlink"
+    href="mailto:a.tseeganov@gmail.com">
+    
+    
+        &#xf6ed;
+    
+    <span>
+        email
+    </span>
+</a>
+
+    </div>
+    
+
+</header>
+<div id="contentContainer">
+                <div id="content">
+                    <main>
+<article class="card single">
+    
+        <h1>Анализ AgentTesla</h1>
+    
+    
+        <p class="date">
+            <span title='Date'> </span>
+    2024-08-04
+
+</p>
+    
+    
+    
+    
+    <div><h2 id="введение">Введение</h2>
+<p>AgentTesla — это тип вредоносного ПО, известный как Remote Access Trojan (RAT) и кейлоггер. Оно активно используется злоумышленниками для кражи конфиденциальной информации с заражённых систем.</p>
+<h2 id="общие-сведения">Общие сведения</h2>
+<p><strong>1. Тип:</strong> Remote Access Trojan (RAT) и кейлоггер</p>
+<p><strong>2. Основные характеристики:</strong></p>
+<ul>
+<li><strong>Шпионские возможности:</strong> AgentTesla способен перехватывать и записывать нажатия клавиш, делать скриншоты, захватывать буфер обмена и собирать данные из различных приложений.</li>
+<li><strong>Кража данных:</strong> Вредоносное ПО часто нацелено на кражу данных аутентификации из веб-браузеров, почтовых клиентов и других приложений.</li>
+<li><strong>Удалённое управление:</strong> AgentTesla позволяет злоумышленникам удалённо управлять заражённой системой, выполняя команды и действия на целевом устройстве.</li>
+</ul>
+<p><strong>3. Распространение:</strong></p>
+<ul>
+<li><strong>Фишинговые атаки:</strong> AgentTesla часто распространяется через фишинговые электронные письма, содержащие вредоносные вложения или ссылки.</li>
+<li><strong>Эксплоиты:</strong> Использование уязвимостей в программном обеспечении для загрузки и выполнения вредоносного кода.</li>
+<li><strong>Социальная инженерия:</strong> Злоумышленники могут использовать методы социальной инженерии для обмана пользователей с целью установки вредоносного ПО.</li>
+</ul>
+<p><strong>4. Вектор атаки:</strong></p>
+<ul>
+<li><strong>Вложения в электронных письмах:</strong> Вредоносные документы, такие как файлы Word или Excel с вредоносными макросами, или архивы, содержащие вредоносные исполняемые файлы.</li>
+<li><strong>Ссылки на вредоносные сайты:</strong> Ссылки в письмах, ведущие на сайты, которые автоматически загружают и запускают AgentTesla.</li>
+</ul>
+<p><strong>5. Функции и возможности:</strong></p>
+<ul>
+<li><strong>Кейлоггер:</strong> Записывает все нажатия клавиш, что позволяет злоумышленникам захватывать пароли и другую конфиденциальную информацию.</li>
+<li><strong>Скриншоты:</strong> Делает скриншоты экрана заражённого компьютера.</li>
+<li><strong>Сетевые данные:</strong> Собирает данные о сетевой активности, включая информацию о подключениях и передаваемых данных.</li>
+<li><strong>Данные из приложений:</strong> Извлечение данных из  веб-браузеров (Chrome, Firefox, Internet Explorer), почтовых клиентов (Outlook, Thunderbird) и других приложений.</li>
+<li><strong>Экфильтрация данных:</strong> Передача собранных данных на удалённый сервер злоумышленников через различные протоколы, включая SMTP, FTP и HTTP.</li>
+</ul>
+<h2 id="статический-анализ">Статический анализ</h2>
+<p>Даннные, полученые в DIE:</p>
+<p><strong>1. Структура файла</strong>
+<strong>Размер файла:</strong> 1.01 МБ<br>
+<strong>Тип файла:</strong> PE (Portable Executable)<br>
+<strong>Компилятор</strong>: AutoIt(3.XX)
+<strong>Хэш SHA-256:</strong> D4C4EE49A5CE076550C8305FCD63FE86707A251A2CA7D47C67D0DBEF66B2A1E3</p>
+<p><strong>2. Секции файла</strong></p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Size</th>
+<th>Entropy</th>
+<th>Status</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>00000000</td>
+<td>00000400</td>
+<td>2.93857</td>
+<td>not packed</td>
+<td>PE Header</td>
+</tr>
+<tr>
+<td>00000400</td>
+<td>0008e000</td>
+<td>6.67525</td>
+<td>packed</td>
+<td>Section(0)[&rsquo;.text']</td>
+</tr>
+<tr>
+<td>0008e400</td>
+<td>0002fe00</td>
+<td>5.76325</td>
+<td>not packed</td>
+<td>Section(1)[&rsquo;.rdata']</td>
+</tr>
+<tr>
+<td>000be200</td>
+<td>00005200</td>
+<td>1.19645</td>
+<td>not packed</td>
+<td>Section(2)[&rsquo;.data']</td>
+</tr>
+<tr>
+<td>000c3400</td>
+<td>00038400</td>
+<td>7.78357</td>
+<td>packed</td>
+<td>Section(3)[&rsquo;.rsrc']</td>
+</tr>
+<tr>
+<td>000fb800</td>
+<td>00007200</td>
+<td>6.78400</td>
+<td>packed</td>
+<td>Section(4)[&rsquo;.reloc']</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2. Структура и импортируемые библиотеки</strong></p>
+<p>Библиотеки:</p>
+<ul>
+<li>placeholder</li>
+</ul>
+<p><strong>3. Основные функции и их анализ</strong></p>
+<p>Основные функции:</p>
+<ul>
+<li>placeholder</li>
+</ul>
+<p><strong>4. Анализ строк и конфигурационных данных</strong></p>
+<p>Строки:</p>
+<ul>
+<li>placeholder</li>
+</ul>
+<p>Конфигурационный блок:</p>
+<ul>
+<li>placeholder</li>
+</ul>
+<p><strong>5. Обфускация</strong></p>
+<p>Методы обфускации:</p>
+<ul>
+<li>placeholder</li>
+</ul>
+<h2 id="динамический-анализ">Динамический анализ</h2>
+<p><strong>1. Сетевая активность</strong></p>
+<ul>
+<li>placeholder</li>
+</ul>
+<p><strong>2. Файловые операции</strong></p>
+<ul>
+<li>placeholder</li>
+</ul>
+<p><strong>3. Отладка</strong></p>
+<p>Отладка в x64dbg:</p>
+<ol>
+<li>Проверка <strong>IsDebuggerPresent</strong>, после чего выводится сообщение: <em>&ldquo;This is a third-party compiled AutoIt Script.&rdquo;</em></li>
+<li>Process hollowing:
+<ol>
+<li>
+<p>Создание легетимного процесса</p>
+<p>AgentTesla создает  процесс <code>RegSvcs.exe</code> с флагом <strong>CREATE_SUSPENDED</strong>, используя следующую команду: placeholder</p>
+</li>
+<li>
+<p>Запись полезной нагрузки: placeholder</p>
+</li>
+<li>
+<p>Возобновление процесса с помощью <strong>ResumeThread</strong>: placeholder</p>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="цепочка-заражения">Цепочка заражения</h2>
+<p>Placeholder</p>
+<h2 id="indicators-of-compromise">Indicators of Compromise</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Категория</th>
+<th style="text-align:center">SHA256</th>
+<th style="text-align:center">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Файлы</td>
+<td style="text-align:center">d4c4ee49a5ce076550c8305fcd63fe86707a251a2ca7d47c67d0dbef66b2a1e3</td>
+<td style="text-align:center">Изначальный ZIP-файл</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mitre-attack-ttps">Mitre Attack TTPs</h2>
+<p>Placeholder</p>
+<h2 id="ссылки">Ссылки</h2>
+<ul>
+<li><a href="https://app.any.run/tasks/ee2f1b8a-8be0-4444-9d1a-fbcb87131191">https://app.any.run/tasks/ee2f1b8a-8be0-4444-9d1a-fbcb87131191</a></li>
+<li><a href="https://bazaar.abuse.ch/sample/d4c4ee49a5ce076550c8305fcd63fe86707a251a2ca7d47c67d0dbef66b2a1e3/">https://bazaar.abuse.ch/sample/d4c4ee49a5ce076550c8305fcd63fe86707a251a2ca7d47c67d0dbef66b2a1e3/</a></li>
+</ul>
+</div>
+</article>
+
+
+
+    <script
+        defer
+        src="https://example.com/js/commento.js"
+        data-no-fonts="true"
+    ></script>
+    <div id="commento"></div>
+
+
+
+
+                    </main><footer>
+    <hr />
+
+<p><small>
+        2024 &copy; Some copyright notice - <a href="https://example.com/license">my license</a>
+    </small></p>
+    <p><small>
+        <a href='https://gitlab.com/gabmus/hugo-ficurinia'>Ficurinia theme</a> for <a href='https://gohugo.io'>Hugo</a> by <a href='https://gabmus.org'>Gabriele Musco</a>. Licensed under <a href='https://www.gnu.org/licenses/agpl-3.0.html'>GNU AGPLv3</a>.
+    </small></p>
+</footer>
+</div>
+            </div>
+        </div>
+    
+        <script
+            async
+            defer
+            data-domain="example.com"
+            src="https://something.com/..."
+        ></script>
+    
+
+
+    
+        <script
+            async
+            defer
+            data-website-id="example-tracking-code"
+            src="https://something.com/..."
+        ></script>
+    
+
+
+</body>
+</html>
