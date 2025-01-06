@@ -92,18 +92,58 @@ AgentTesla — это тип вредоносного ПО, известный �
 
 **3. Отладка**
 
-Отладка в x64dbg:
-1. Проверка **IsDebuggerPresent**, после чего выводится сообщение: *"This is a third-party compiled AutoIt Script."*
-2. Process hollowing:
-	1. Создание легетимного процесса  
-		
-		AgentTesla создает  процесс `RegSvcs.exe` с флагом **CREATE_SUSPENDED**, используя следующую команду: placeholder
-	1. Запись полезной нагрузки: placeholder
-	3. Возобновление процесса с помощью **ResumeThread**: placeholder
+- Отладка в x64dbg:
+	1. Проверка **IsDebuggerPresent**, после чего выводится сообщение: *"This is a third-party compiled AutoIt Script."*
+	2. Process hollowing:
+		Создание легетимного процесса  
+			1. AgentTesla создает  процесс `RegSvcs.exe` с флагом **CREATE_SUSPENDED**, используя следующую команду: placeholder
+			2. Запись полезной нагрузки: placeholder
+			3. Возобновление процесса с помощью **ResumeThread**: placeholder
 
-3. Извлечение конфигурации
+- Извлечение конфигурации
 		С помощью HollowsHunter из процесса RegSvcs.exe извлечена сборка .NET. В dnSpy отображаются классы и функции сборки в обфусцированном виде.
+		
+- Отладка извлеченной сборки в dnSpy
+  1. Настройка сертификатов 
+     Устанавливается делегат, который всегда возвращает true, подтверждая любую проверку сертификатов.
+     
+	1. Получение текущего делегата для проверки сертификатов: Используется свойство ServicePointManager.ServerCertificateValidationCallback для получения текущего делегата, отвечающего за проверку сертификатов.
+	2. Создание нового делегата: Если делегат TIih8WcH.CS$<>9__CachedAnonymousMethodDelegate1 ещё не создан, создаётся новый делегат, ссылающийся на метод TIih8WcH.jgbfREqD.
+	3. Объединение делегатов: Существующий делегат для проверки сертификатов комбинируется с новым делегатом посредством вызова Delegate.Combine.
+	4. Установка нового делегата: Новый комбинированный делегат назначается в качестве делегата для проверки сертификатов через ServicePointManager.ServerCertificateValidationCallback.
+```csharp
+     if (num == 2)
+{
+    Delegate serverCertificateValidationCallback = ServicePointManager.ServerCertificateValidationCallback;
+    if (TIih8WcH.CS$<>9__CachedAnonymousMethodDelegate1 == null)
+    {
+        TIih8WcH.CS$<>9__CachedAnonymousMethodDelegate1 = new RemoteCertificateValidationCallback(TIih8WcH.jgbfREqD);
+    }
+    ServicePointManager.ServerCertificateValidationCallback = (RemoteCertificateValidationCallback)Delegate.Combine(serverCertificateValidationCallback, TIih8WcH.CS$<>9__CachedAnonymousMethodDelegate1);
+    num = 3;
+}
+```
+Проверка сертификатов 
+1. Получение текущего делегата для проверки сертификатов: Используется свойство ServicePointManager.ServerCertificateValidationCallback для получения текущего делегата, отвечающего за проверку сертификатов.
+2. Создание нового делегата: Если делегат TIih8WcH.CS$<>9__CachedAnonymousMethodDelegate1 ещё не создан, создаётся новый делегат, ссылающийся на метод TIih8WcH.jgbfREqD.
+3. Объединение делегатов: Существующий делегат для проверки сертификатов комбинируется с новым делегатом посредством вызова Delegate.Combine.
+4. Установка нового делегата: Новый комбинированный делегат назначается в качестве делегата для проверки сертификатов через ServicePointManager.ServerCertificateValidationCallback.
 
+```csharp
+private static bool jgbfREqD(object mUnuRbJ3, X509Certificate yGOKueQ, X509Chain frxz, SslPolicyErrors WSz)`
+`{`
+    `int num = 0;`
+    `do`
+    `{`
+        `if (num == 0)`
+        `{`
+            `num = 1;`
+        `}`
+    `}`
+    `while (num != 1);`
+    `return true;`
+`}`
+```
 ## Цепочка заражения
 Placeholder
 ## Indicators of Compromise

@@ -69,7 +69,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "a4a1e2fc6329fe68",
@@ -146,7 +147,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "a3d9bc64a665ab8b",
+  "active": "40895a4b0997e211",
   "lastOpenFiles": [
     "public/posts/анализ-agenttesla/index.html",
     "public/posts/анализ-agenttesla",
