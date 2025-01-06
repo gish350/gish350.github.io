@@ -69,8 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "a4a1e2fc6329fe68",
@@ -147,12 +146,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "40895a4b0997e211",
+  "active": "a3d9bc64a665ab8b",
   "lastOpenFiles": [
+    "content/posts/tutorial_kvm.md",
+    "content/posts/Анализ AgentTesla.md",
     "public/posts/анализ-agenttesla/index.html",
     "public/posts/анализ-agenttesla",
-    "content/posts/Анализ AgentTesla.md",
-    "Untitled",
-    "content/posts/tutorial_kvm.md"
+    "Untitled"
   ]
 }
