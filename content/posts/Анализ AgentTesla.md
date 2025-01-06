@@ -130,19 +130,19 @@ AgentTesla — это тип вредоносного ПО, известный �
 4. Установка нового делегата: Новый комбинированный делегат назначается в качестве делегата для проверки сертификатов через ServicePointManager.ServerCertificateValidationCallback.
 
 ```csharp
-private static bool jgbfREqD(object mUnuRbJ3, X509Certificate yGOKueQ, X509Chain frxz, SslPolicyErrors WSz)`
-`{`
-    `int num = 0;`
-    `do`
-    `{`
-        `if (num == 0)`
-        `{`
-            `num = 1;`
-        `}`
-    `}`
-    `while (num != 1);`
-    `return true;`
-`}`
+private static bool jgbfREqD(object mUnuRbJ3, X509Certificate yGOKueQ, X509Chain frxz, SslPolicyErrors WSz)
+{
+    int num = 0;
+    do
+    {
+        if (num == 0)
+        {
+            num = 1;
+        }
+    }
+    while (num != 1);
+    return true;
+}
 ```
 ## Цепочка заражения
 Placeholder
