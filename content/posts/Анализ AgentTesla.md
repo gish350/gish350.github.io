@@ -104,47 +104,59 @@ AgentTesla — это тип вредоносного ПО, известный �
 		С помощью HollowsHunter из процесса **RegSvcs.exe** извлечена сборка .NET. В dnSpy отображаются классы и функции сборки в обфусцированном виде.
 		
 - Отладка извлеченной сборки в dnSpy
-  1. Настройка HTTPS соединения
-	- Установка поддерживаемых протоколов (SSL 3.0, TLS 1.0, TLS 1.1, TLS 1.2)
+	1. Настройка HTTPS соединения
+		- Установка поддерживаемых протоколов (SSL 3.0, TLS 1.0, TLS 1.1, TLS 1.2)
+			```csharp
+				if (num == 1)
+							{
+								ServicePointManager.SecurityProtocol = (SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12);
+								num = 2;
+							}
+			```
+		- Устанавливается делегат, который всегда возвращает true, подтверждая любую проверку сертификатов.
+	
+			```csharp
+				 if (num == 2)
+			{
+				Delegate serverCertificateValidationCallback = ServicePointManager.ServerCertificateValidationCallback;
+				if (TIih8WcH.CS$<>9__CachedAnonymousMethodDelegate1 == null)
+				{
+					TIih8WcH.CS$<>9__CachedAnonymousMethodDelegate1 = new RemoteCertificateValidationCallback(TIih8WcH.jgbfREqD);
+				}
+				ServicePointManager.ServerCertificateValidationCallback = (RemoteCertificateValidationCallback)Delegate.Combine(serverCertificateValidationCallback, TIih8WcH.CS$<>9__CachedAnonymousMethodDelegate1);
+				num = 3;
+			}
+			```
+		- Функция проверки сертификатов 
+		
+			```csharp
+			private static bool jgbfREqD(object mUnuRbJ3, X509Certificate yGOKueQ, X509Chain frxz, SslPolicyErrors WSz)
+			{
+				int num = 0;
+				do
+				{
+					if (num == 0)
+					{
+						num = 1;
+					}
+				}
+				while (num != 1);
+				return true;
+			}
+			```
+	1. Завершение всех процессов, кроме текущего 
 		```csharp
-			if (num == 1)
+				string processName = Process.GetCurrentProcess().ProcessName;
+						int id = Process.GetCurrentProcess().Id;
+						Process processesByName = Process.GetProcessesByName(processName);
+						foreach (Process process in processesByName)
 						{
-							ServicePointManager.SecurityProtocol = (SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12);
-							num = 2;
+							if (process.Id != id)
+							{
+								process.Kill();
+							}
 						}
 		```
-- Устанавливается делегат, который всегда возвращает true, подтверждая любую проверку сертификатов.
-
-	```csharp
-	     if (num == 2)
-	{
-	    Delegate serverCertificateValidationCallback = ServicePointManager.ServerCertificateValidationCallback;
-	    if (TIih8WcH.CS$<>9__CachedAnonymousMethodDelegate1 == null)
-	    {
-	        TIih8WcH.CS$<>9__CachedAnonymousMethodDelegate1 = new RemoteCertificateValidationCallback(TIih8WcH.jgbfREqD);
-	    }
-	    ServicePointManager.ServerCertificateValidationCallback = (RemoteCertificateValidationCallback)Delegate.Combine(serverCertificateValidationCallback, TIih8WcH.CS$<>9__CachedAnonymousMethodDelegate1);
-	    num = 3;
-	}
-	```
-	- Функция проверки сертификатов 
-	
-	```csharp
-	private static bool jgbfREqD(object mUnuRbJ3, X509Certificate yGOKueQ, X509Chain frxz, SslPolicyErrors WSz)
-	{
-	    int num = 0;
-	    do
-	    {
-	        if (num == 0)
-	        {
-	            num = 1;
-	        }
-	    }
-	    while (num != 1);
-	    return true;
-	}
-	```
-1. Завершение всех процессов, кроме текущего 
 ## Цепочка заражения
 Placeholder
 ## Indicators of Compromise

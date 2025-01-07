@@ -315,7 +315,7 @@
 <p><strong>5. Обфускация</strong></p>
 <p>Методы обфускации:</p>
 <ul>
-<li>placeholder</li>
+<li>Исполняемый файл упакован с помощью AutoIt и обфусцирован. С помощью AutoItRipper была извлечена обфусцированная конфигурация.</li>
 </ul>
 <h2 id="динамический-анализ">Динамический анализ</h2>
 <p><strong>1. Сетевая активность</strong></p>
@@ -327,24 +327,81 @@
 <li>placeholder</li>
 </ul>
 <p><strong>3. Отладка</strong></p>
+<ul>
+<li>
 <p>Отладка в x64dbg:</p>
 <ol>
 <li>Проверка <strong>IsDebuggerPresent</strong>, после чего выводится сообщение: <em>&ldquo;This is a third-party compiled AutoIt Script.&rdquo;</em></li>
 <li>Process hollowing:
+Создание легетимного процесса<br>
+1. AgentTesla создает  процесс <code>RegSvcs.exe</code> с флагом <strong>CREATE_SUSPENDED</strong>, используя следующую команду: placeholder
+2. Запись полезной нагрузки: placeholder
+3. Возобновление процесса с помощью <strong>ResumeThread</strong>: placeholder</li>
+</ol>
+</li>
+<li>
+<p>Извлечение конфигурации
+С помощью HollowsHunter из процесса <strong>RegSvcs.exe</strong> извлечена сборка .NET. В dnSpy отображаются классы и функции сборки в обфусцированном виде.</p>
+</li>
+<li>
+<p>Отладка извлеченной сборки в dnSpy</p>
 <ol>
+<li>Настройка HTTPS соединения
+<ul>
 <li>
-<p>Создание легетимного процесса</p>
-<p>AgentTesla создает  процесс <code>RegSvcs.exe</code> с флагом <strong>CREATE_SUSPENDED</strong>, используя следующую команду: placeholder</p>
-</li>
+<p>Установка поддерживаемых протоколов (SSL 3.0, TLS 1.0, TLS 1.1, TLS 1.2)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (num == <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>				{
+</span></span><span style="display:flex;"><span>					ServicePointManager.SecurityProtocol = (SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12);
+</span></span><span style="display:flex;"><span>					num = <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>				}
+</span></span></code></pre></div></li>
 <li>
-<p>Запись полезной нагрузки: placeholder</p>
-</li>
+<p>Устанавливается делегат, который всегда возвращает true, подтверждая любую проверку сертификатов.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>	 <span style="color:#66d9ef">if</span> (num == <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Delegate serverCertificateValidationCallback = ServicePointManager.ServerCertificateValidationCallback;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (TIih8WcH.CS<span style="color:#960050;background-color:#1e0010">$</span>&lt;&gt;<span style="color:#ae81ff">9__</span>CachedAnonymousMethodDelegate1 == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		TIih8WcH.CS<span style="color:#960050;background-color:#1e0010">$</span>&lt;&gt;<span style="color:#ae81ff">9__</span>CachedAnonymousMethodDelegate1 = <span style="color:#66d9ef">new</span> RemoteCertificateValidationCallback(TIih8WcH.jgbfREqD);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	ServicePointManager.ServerCertificateValidationCallback = (RemoteCertificateValidationCallback)Delegate.Combine(serverCertificateValidationCallback, TIih8WcH.CS<span style="color:#960050;background-color:#1e0010">$</span>&lt;&gt;<span style="color:#ae81ff">9__</span>CachedAnonymousMethodDelegate1);
+</span></span><span style="display:flex;"><span>	num = <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
 <li>
-<p>Возобновление процесса с помощью <strong>ResumeThread</strong>: placeholder</p>
+<p>Функция проверки сертификатов</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">bool</span> jgbfREqD(<span style="color:#66d9ef">object</span> mUnuRbJ3, X509Certificate yGOKueQ, X509Chain frxz, SslPolicyErrors WSz)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> num = <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (num == <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			num = <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">while</span> (num != <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ul>
 </li>
+<li>Завершение всех процессов, кроме текущего
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>		<span style="color:#66d9ef">string</span> processName = Process.GetCurrentProcess().ProcessName;
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">int</span> id = Process.GetCurrentProcess().Id;
+</span></span><span style="display:flex;"><span>				Process processesByName = Process.GetProcessesByName(processName);
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">foreach</span> (Process process <span style="color:#66d9ef">in</span> processesByName)
+</span></span><span style="display:flex;"><span>				{
+</span></span><span style="display:flex;"><span>					<span style="color:#66d9ef">if</span> (process.Id != id)
+</span></span><span style="display:flex;"><span>					{
+</span></span><span style="display:flex;"><span>						process.Kill();
+</span></span><span style="display:flex;"><span>					}
+</span></span><span style="display:flex;"><span>				}
+</span></span></code></pre></div></li>
 </ol>
 </li>
-</ol>
+</ul>
 <h2 id="цепочка-заражения">Цепочка заражения</h2>
 <p>Placeholder</p>
 <h2 id="indicators-of-compromise">Indicators of Compromise</h2>
@@ -390,7 +447,7 @@
     <hr />
 
 <p><small>
-        2024 &copy; Some copyright notice - <a href="https://example.com/license">my license</a>
+        2025 &copy; Some copyright notice - <a href="https://example.com/license">my license</a>
     </small></p>
     <p><small>
         <a href='https://gitlab.com/gabmus/hugo-ficurinia'>Ficurinia theme</a> for <a href='https://gohugo.io'>Hugo</a> by <a href='https://gabmus.org'>Gabriele Musco</a>. Licensed under <a href='https://www.gnu.org/licenses/agpl-3.0.html'>GNU AGPLv3</a>.
