@@ -107,16 +107,16 @@ AgentTesla — это тип вредоносного ПО, известный �
 	1. Настройка HTTPS соединения
 		- Установка поддерживаемых протоколов (SSL 3.0, TLS 1.0, TLS 1.1, TLS 1.2)
 			```csharp
-				if (num == 1)
-							{
-								ServicePointManager.SecurityProtocol = (SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12);
-								num = 2;
-							}
+			if (num == 1)
+			{
+				ServicePointManager.SecurityProtocol = (SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12);
+				num = 2;
+			}
 			```
 		- Устанавливается делегат, который всегда возвращает true, подтверждая любую проверку сертификатов.
 	
 			```csharp
-				 if (num == 2)
+			 if (num == 2)
 			{
 				Delegate serverCertificateValidationCallback = ServicePointManager.ServerCertificateValidationCallback;
 				if (TIih8WcH.CS$<>9__CachedAnonymousMethodDelegate1 == null)
@@ -146,17 +146,32 @@ AgentTesla — это тип вредоносного ПО, известный �
 			```
 	1. Завершение всех процессов, кроме текущего 
 		```csharp
-				string processName = Process.GetCurrentProcess().ProcessName;
-						int id = Process.GetCurrentProcess().Id;
-						Process processesByName = Process.GetProcessesByName(processName);
-						foreach (Process process in processesByName)
-						{
-							if (process.Id != id)
-							{
-								process.Kill();
-							}
-						}
+		string processName = Process.GetCurrentProcess().ProcessName;
+				int id = Process.GetCurrentProcess().Id;
+				Process processesByName = Process.GetProcessesByName(processName);
+				foreach (Process process in processesByName)
+				{
+					if (process.Id != id)
+					{
+						process.Kill();
+					}
+				}
 		```
+	1. Генерация идентификатора машины
+		- Функция вызывает другие функции для получения серийного номера материнской платы, идентификатора процессора и MAC-адреса сетевого адаптера. Затем она объединяет их и вычисляет MD5-хэш от этой строки. В случае ошибки возвращается строка "None".
+			
+			```csharp
+			text = fHfXQzVTqo.ouKT(MD5.Create(), fHfXQzVTqo.wENtroM1A() + fHfXQzVTqo.gwVUs7kYe() + fHfXQzVTqo.kz1WOlEk7TS());
+			```
+	1. Получение пути к загруженному файлу сборки 
+	   - Получение пути к загруженному файлу сборки 
+		```csharp
+	   Stu4Un2.AsmFilePath = Assembly.GetExecutingAssembly().Location;
+	   ```
+	   - Получение пути до директории хранения данных приложения (окружение + имя поддиректории)
+	   ```csharp
+	    Stu4Un2.StartupDirectoryPath = Path.Combine(Environment.GetEnvironmentVariable(Stu4Un2.StartupEnvName), Stu4Un2.StartupDirectoryName);
+		```  
 ## Цепочка заражения
 Placeholder
 ## Indicators of Compromise
