@@ -194,6 +194,25 @@ AgentTesla — это тип вредоносного ПО, известный �
 		httpWebRequest.Method = "GET";
 		httpWebRequest.UserAgent = Stu4Un2.PublicUserAgent;
 		```
+	1. Проверки на песочницу
+		- Проверка наличия отладчика
+		```csharp
+		n1uhLjf.CheckRemoteDebuggerPresent(Process.GetCurrentProcess().Handle, ref flag);
+		```
+		- Проверка, находится ли IP-адрес компьютера в диапазоне хостинг-провайдеров
+		```csharp
+		string text = new WebClient().DownloadString("http://ip-api.com/line/?fields=hosting");
+					return text.Contains("true");
+		```
+	1. Проверки времени сна
+		```csharp
+		long ticks = DateTime.Now.Ticks;
+		Thread.Sleep(10);
+		if (DateTime.Now.Ticks - ticks < 10L)
+		{
+		    return true;
+		}
+		```
 
 ## Цепочка заражения
 Placeholder
