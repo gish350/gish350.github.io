@@ -205,6 +205,7 @@ AgentTesla — это тип вредоносного ПО, известный �
 					return text.Contains("true");
 		```
 	1. Проверки времени сна
+		- Некоторые виртуализированные среды и песочницы пытаются замедлить выполнение программы, чтобы затруднить анализ её поведения. Например, они могут искусственно увеличивать время, необходимое для выполнения команд, чтобы имитировать реальную производительность. Если система замедлит выполнение команды Sleep(10), но не учтет реального времени, то произойдет расхождение во времени, и метод выявит это несоответствие.
 		```csharp
 		long ticks = DateTime.Now.Ticks;
 		Thread.Sleep(10);
@@ -213,7 +214,53 @@ AgentTesla — это тип вредоносного ПО, известный �
 		    return true;
 		}
 		```
-
+	1. Проверка модулей в памяти, связанных с виртуализацией
+		- SbieDll.dll (VmWare)
+	    - Snxhk.dll, Cmdvrt32.dll (Hyper-V)
+	    - Cmdvrt32.dll (Windows-Server)
+	    - Sf2.dll (IO)
+    1. Проверки производителя компьютера и видеокарты
+		    - Поиск объектов ManagementObjectSearcher:
+		- В цикле выполняется поиск объектов ManagementObjectSearcher, которые соответствуют компьютерам, работающим в виртуализированной среде или песочнице.
+		- Проверка производителей и моделей:
+		    - Для каждого найденного объекта проверяется, содержит ли его производитель строку "Microsoft Corporation" и модель "VIRTUAL". Если это так, метод возвращает true, указывающий на работу в виртуализированной среде.
+		    - Также проверяется наличие производителей "VMware" и моделей "VirtualBox".
+		- Проверка видеокарт:
+		- Если объекты имеют названия, содержащие "VMware" или "VBox", метод возвращает true, предполагающий работу в виртуализированной среде.
+```csharp
+	    managementObjectSearcher = new ManagementObjectSearcher("Select * from Win32_ComputerSystem");
+	  	using (ManagementObjectCollection managementObjectCollection = managementObjectSearcher.Get())
+				{
+					foreach (ManagementBaseObject managementBaseObject in managementObjectCollection)
+					{
+						if ((managementBaseObject["Manufacturer"].ToString().ToLower() == "microsoft corporation" && managementBaseObject["Model"].ToString().ToUpperInvariant().Contains("VIRTUAL")) || managementBaseObject["Manufacturer"].ToString().ToLower().Contains("vmware") || managementBaseObject["Model"].ToString() == "VirtualBox")
+						{
+							return true;
+						}
+					}
+				}
+			}
+			catch
+			{
+				return true;
+			}
+			finally
+			{
+				if (managementObjectSearcher != null)
+				{
+					((IDisposable)managementObjectSearcher).Dispose();
+				}
+			}
+			foreach (ManagementBaseObject managementBaseObject2 in new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_VideoController").Get())
+			{
+				if (managementBaseObject2.GetPropertyValue("Name").ToString().Contains("VMware") && managementBaseObject2.GetPropertyValue("Name").ToString().Contains("VBox"))
+				{
+					return true;
+				}
+			}
+			return false;
+```
+    
 ## Цепочка заражения
 Placeholder
 ## Indicators of Compromise

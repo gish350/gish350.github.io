@@ -160,7 +160,8 @@
 <li>
 <p>Отладка извлеченной сборки в dnSpy</p>
 <ol>
-<li>Настройка HTTPS соединения
+<li>
+<p>Настройка HTTPS соединения</p>
 <ul>
 <li>
 <p>Установка поддерживаемых протоколов (SSL 3.0, TLS 1.0, TLS 1.1, TLS 1.2)</p>
@@ -201,7 +202,8 @@
 </span></span></code></pre></div></li>
 </ul>
 </li>
-<li>Завершение всех процессов, кроме текущего
+<li>
+<p>Завершение всех процессов, кроме текущего</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">string</span> processName = Process.GetCurrentProcess().ProcessName;
 </span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">int</span> id = Process.GetCurrentProcess().Id;
 </span></span><span style="display:flex;"><span>		Process processesByName = Process.GetProcessesByName(processName);
@@ -213,7 +215,8 @@
 </span></span><span style="display:flex;"><span>			}
 </span></span><span style="display:flex;"><span>		}
 </span></span></code></pre></div></li>
-<li>Генерация идентификатора машины
+<li>
+<p>Генерация идентификатора машины</p>
 <ul>
 <li>
 <p>Функция вызывает другие функции для получения серийного номера материнской платы, идентификатора процессора и MAC-адреса сетевого адаптера. Затем она объединяет их и вычисляет MD5-хэш от этой строки. В случае ошибки возвращается строка &ldquo;None&rdquo;.</p>
@@ -221,7 +224,8 @@
 </span></span></code></pre></div></li>
 </ul>
 </li>
-<li>Получение пути к загруженному файлу сборки
+<li>
+<p>Настройка автозагрузки</p>
 <ul>
 <li>Получение пути к загруженному файлу сборки</li>
 </ul>
@@ -230,6 +234,53 @@
 <li>Получение пути до директории хранения данных приложения (окружение + имя поддиректории)</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span> Stu4Un2.StartupDirectoryPath = Path.Combine(Environment.GetEnvironmentVariable(Stu4Un2.StartupEnvName), Stu4Un2.StartupDirectoryName);
+</span></span></code></pre></div><ul>
+<li>Получение полного пути к файлу автозапуска</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>Stu4Un2.AppStartupFullPath = Path.Combine(Stu4Un2.StartupDirectoryPath, Stu4Un2.StartupInstallationName);
+</span></span></code></pre></div></li>
+<li>
+<p>Взаимодействие с C2</p>
+<ul>
+<li>Формирование строки &ldquo;ИмяПользователя/ИмяКомпьютера&rdquo;</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>	Stu4Un2.ThisComputerName = SystemInformation.UserName + <span style="color:#e6db74">&#34;/&#34;</span> + SystemInformation.ComputerName;
+</span></span></code></pre></div><ul>
+<li>Создание и настройка веб-запроса
+<ul>
+<li>Выполняется GET-запрос к &ldquo;<a href="https://api.ipify.org">https://api.ipify.org</a>&rdquo;, и возвращает содержимое ответа в виде строки. Если запрос успешен и сервер вернул статус &ldquo;OK&rdquo;, то возвращается тело ответа. В противном случае возвращается пустая строка.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(Stu4Un2.IpApi);
+</span></span><span style="display:flex;"><span>httpWebRequest.Credentials = CredentialCache.DefaultCredentials;
+</span></span><span style="display:flex;"><span>httpWebRequest.KeepAlive = <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>httpWebRequest.Timeout = <span style="color:#ae81ff">10000</span>;
+</span></span><span style="display:flex;"><span>httpWebRequest.AllowAutoRedirect = <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>httpWebRequest.MaximumAutomaticRedirections = <span style="color:#ae81ff">50</span>;
+</span></span><span style="display:flex;"><span>httpWebRequest.Method = <span style="color:#e6db74">&#34;GET&#34;</span>;
+</span></span><span style="display:flex;"><span>httpWebRequest.UserAgent = Stu4Un2.PublicUserAgent;
+</span></span></code></pre></div></li>
+<li>
+<p>Проверки на песочницу</p>
+<ul>
+<li>Проверка наличия отладчика</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>n1uhLjf.CheckRemoteDebuggerPresent(Process.GetCurrentProcess().Handle, <span style="color:#66d9ef">ref</span> flag);
+</span></span></code></pre></div><ul>
+<li>Проверка, находится ли IP-адрес компьютера в диапазоне хостинг-провайдеров</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">string</span> text = <span style="color:#66d9ef">new</span> WebClient().DownloadString(<span style="color:#e6db74">&#34;http://ip-api.com/line/?fields=hosting&#34;</span>);
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> text.Contains(<span style="color:#e6db74">&#34;true&#34;</span>);
+</span></span></code></pre></div></li>
+<li>
+<p>Проверки времени сна</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> ticks = DateTime.Now.Ticks;
+</span></span><span style="display:flex;"><span>Thread.Sleep(<span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (DateTime.Now.Ticks - ticks &lt; <span style="color:#ae81ff">10L</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div></li>
 </ol>
 </li>
