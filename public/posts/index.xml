@@ -275,6 +275,9 @@
 </span></span></code></pre></div></li>
 <li>
 <p>Проверки времени сна</p>
+<ul>
+<li>Некоторые виртуализированные среды и песочницы пытаются замедлить выполнение программы, чтобы затруднить анализ её поведения. Например, они могут искусственно увеличивать время, необходимое для выполнения команд, чтобы имитировать реальную производительность. Если система замедлит выполнение команды Sleep(10), но не учтет реального времени, то произойдет расхождение во времени, и метод выявит это несоответствие.</li>
+</ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> ticks = DateTime.Now.Ticks;
 </span></span><span style="display:flex;"><span>Thread.Sleep(<span style="color:#ae81ff">10</span>);
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (DateTime.Now.Ticks - ticks &lt; <span style="color:#ae81ff">10L</span>)
@@ -282,10 +285,65 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div></li>
+<li>
+<p>Проверка модулей в памяти, связанных с виртуализацией</p>
+<ul>
+<li>SbieDll.dll (VmWare)</li>
+<li>Snxhk.dll, Cmdvrt32.dll (Hyper-V)</li>
+<li>Cmdvrt32.dll (Windows-Server)</li>
+<li>Sf2.dll (IO)</li>
+</ul>
+</li>
+<li>
+<p>Проверки производителя компьютера и видеокарты</p>
+<ul>
+<li>Поиск объектов ManagementObjectSearcher:</li>
+<li>В цикле выполняется поиск объектов ManagementObjectSearcher, которые соответствуют компьютерам, работающим в виртуализированной среде или песочнице.</li>
+<li>Проверка производителей и моделей:
+<ul>
+<li>Для каждого найденного объекта проверяется, содержит ли его производитель строку &ldquo;Microsoft Corporation&rdquo; и модель &ldquo;VIRTUAL&rdquo;. Если это так, метод возвращает true, указывающий на работу в виртуализированной среде.</li>
+<li>Также проверяется наличие производителей &ldquo;VMware&rdquo; и моделей &ldquo;VirtualBox&rdquo;.</li>
+</ul>
+</li>
+<li>Проверка видеокарт:</li>
+<li>Если объекты имеют названия, содержащие &ldquo;VMware&rdquo; или &ldquo;VBox&rdquo;, метод возвращает true, предполагающий работу в виртуализированной среде.</li>
+</ul>
+</li>
 </ol>
 </li>
 </ul>
-<h2 id="цепочка-заражения">Цепочка заражения</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>	    managementObjectSearcher = <span style="color:#66d9ef">new</span> ManagementObjectSearcher(<span style="color:#e6db74">&#34;Select * from Win32_ComputerSystem&#34;</span>);
+</span></span><span style="display:flex;"><span>	  	<span style="color:#66d9ef">using</span> (ManagementObjectCollection managementObjectCollection = managementObjectSearcher.Get())
+</span></span><span style="display:flex;"><span>				{
+</span></span><span style="display:flex;"><span>					<span style="color:#66d9ef">foreach</span> (ManagementBaseObject managementBaseObject <span style="color:#66d9ef">in</span> managementObjectCollection)
+</span></span><span style="display:flex;"><span>					{
+</span></span><span style="display:flex;"><span>						<span style="color:#66d9ef">if</span> ((managementBaseObject[<span style="color:#e6db74">&#34;Manufacturer&#34;</span>].ToString().ToLower() == <span style="color:#e6db74">&#34;microsoft corporation&#34;</span> &amp;&amp; managementBaseObject[<span style="color:#e6db74">&#34;Model&#34;</span>].ToString().ToUpperInvariant().Contains(<span style="color:#e6db74">&#34;VIRTUAL&#34;</span>)) || managementBaseObject[<span style="color:#e6db74">&#34;Manufacturer&#34;</span>].ToString().ToLower().Contains(<span style="color:#e6db74">&#34;vmware&#34;</span>) || managementBaseObject[<span style="color:#e6db74">&#34;Model&#34;</span>].ToString() == <span style="color:#e6db74">&#34;VirtualBox&#34;</span>)
+</span></span><span style="display:flex;"><span>						{
+</span></span><span style="display:flex;"><span>							<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>						}
+</span></span><span style="display:flex;"><span>					}
+</span></span><span style="display:flex;"><span>				}
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">catch</span>
+</span></span><span style="display:flex;"><span>			{
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">finally</span>
+</span></span><span style="display:flex;"><span>			{
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">if</span> (managementObjectSearcher != <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>				{
+</span></span><span style="display:flex;"><span>					((IDisposable)managementObjectSearcher).Dispose();
+</span></span><span style="display:flex;"><span>				}
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">foreach</span> (ManagementBaseObject managementBaseObject2 <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">new</span> ManagementObjectSearcher(<span style="color:#e6db74">&#34;root\\CIMV2&#34;</span>, <span style="color:#e6db74">&#34;SELECT * FROM Win32_VideoController&#34;</span>).Get())
+</span></span><span style="display:flex;"><span>			{
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">if</span> (managementBaseObject2.GetPropertyValue(<span style="color:#e6db74">&#34;Name&#34;</span>).ToString().Contains(<span style="color:#e6db74">&#34;VMware&#34;</span>) &amp;&amp; managementBaseObject2.GetPropertyValue(<span style="color:#e6db74">&#34;Name&#34;</span>).ToString().Contains(<span style="color:#e6db74">&#34;VBox&#34;</span>))
+</span></span><span style="display:flex;"><span>				{
+</span></span><span style="display:flex;"><span>					<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>				}
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span></code></pre></div><h2 id="цепочка-заражения">Цепочка заражения</h2>
 <p>Placeholder</p>
 <h2 id="indicators-of-compromise">Indicators of Compromise</h2>
 <table>
