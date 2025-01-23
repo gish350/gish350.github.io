@@ -343,7 +343,11 @@
 </span></span><span style="display:flex;"><span>				}
 </span></span><span style="display:flex;"><span>			}
 </span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
-</span></span></code></pre></div><h2 id="цепочка-заражения">Цепочка заражения</h2>
+</span></span></code></pre></div><p>Далее, перейдя в класс <strong>qXK</strong>, код стал слишком запутанным. До этого места обфускация была несильной, но перейдя в этот класс я обнаружил следующий листинг:</p>
+<p><img src="/Animation.gif" alt="Animation.gif"></p>
+<p>Я нашел <a href="https://ryan-weil.github.io/posts/AGENT-TESLA-2/%D0%B3%D0%B4%D0%B5">статью</a> описано написание деобфускатора для de4dot на похожем образце AgentTesla, где происходит [PLACEHOLDER]. Вот что получилось в результате</p>
+<p><img src="/flat.png" alt="flat.png"></p>
+<h2 id="цепочка-заражения">Цепочка заражения</h2>
 <p>Placeholder</p>
 <h2 id="indicators-of-compromise">Indicators of Compromise</h2>
 <table>

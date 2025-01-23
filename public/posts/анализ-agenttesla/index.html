@@ -529,9 +529,17 @@
 </span></span><span style="display:flex;"><span>				}
 </span></span><span style="display:flex;"><span>			}
 </span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
-</span></span></code></pre></div><p>Далее, перейдя в класс <strong>qXK</strong>, код стал слишком запутанным. До этого места обфускация была несильной, но перейдя в этот класс я обнаружил следующий листинг:</p>
+</span></span></code></pre></div><p>Далее, перейдя в класс <strong>qXK</strong>, обфускация сильно увеличилась:</p>
 <p><img src="/Animation.gif" alt="Animation.gif"></p>
-<p>Я нашел статью где описано написание деобфускатора для de4dot на похожем образце AgentTesla, где происходит [PLACEHOLDER]. Вот что получилось в результате</p>
+<p>Попытка воспользоваться <strong>de4dot</strong> с его дефолтными параметрами не оказала никакого влияния на код.
+После этого, я наткнулся на  <a href="https://ryan-weil.github.io/posts/AGENT-TESLA-2">статью</a>, в которой описывается написание реализации деобфускатора для  для de4dot.</p>
+<ul>
+<li>Краткое описание метода<br>
+В статье показан процесс &ldquo;выпрямления&rdquo; метода, т.е. избавления от условий и переходов. <br>
+PLACEHOLDER<br>
+PLACEHOLDER</li>
+<li>Результат</li>
+</ul>
 <p><img src="/flat.png" alt="flat.png"></p>
 <h2 id="цепочка-заражения">Цепочка заражения</h2>
 <p>Placeholder</p>
