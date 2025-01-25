@@ -329,13 +329,14 @@
 <p><strong>3. Отладка</strong></p>
 <ul>
 <li>
-<p>Отладка в x64dbg:</p>
+<p>Отладка в x32dbg:</p>
 <ol>
-<li>Проверка <strong>IsDebuggerPresent</strong>, после чего выводится сообщение: <em>&ldquo;This is a third-party compiled AutoIt Script.&rdquo;</em></li>
+<li>Проверка <strong>IsDebuggerPresent</strong>, после чего выводится сообщение: <em>&ldquo;This is a third-party compiled AutoIt Script.&rdquo;</em>!<br>
+<img src="/screen.png" alt="Screenshot from 2025-01-25 19-46-09.png"></li>
 <li>Process hollowing:
 Создание легетимного процесса<br>
-1. AgentTesla создает  процесс <code>RegSvcs.exe</code> с флагом <strong>CREATE_SUSPENDED</strong>, используя следующую команду: placeholder
-2. Запись полезной нагрузки: placeholder
+1. AgentTesla создает  процесс <code>RegSvcs.exe</code> с флагом <strong>CREATE_SUSPENDED</strong>, используя следующую команду: placeholder<br>
+2. Запись полезной нагрузки: placeholder<br>
 3. Возобновление процесса с помощью <strong>ResumeThread</strong>: placeholder</li>
 </ol>
 </li>

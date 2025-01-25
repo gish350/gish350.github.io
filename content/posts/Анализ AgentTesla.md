@@ -92,13 +92,14 @@ AgentTesla — это тип вредоносного ПО, известный �
 
 **3. Отладка**
 
-- Отладка в x64dbg:
-	1. Проверка **IsDebuggerPresent**, после чего выводится сообщение: *"This is a third-party compiled AutoIt Script."*
-	2. Process hollowing:
+- Отладка в x32dbg:
+	1. Проверка **IsDebuggerPresent**, после чего выводится сообщение: *"This is a third-party compiled AutoIt Script."*!  
+![Screenshot from 2025-01-25 19-46-09.png](/screen.png)
+	3. Process hollowing:
 		Создание легетимного процесса  
-			1. AgentTesla создает  процесс `RegSvcs.exe` с флагом **CREATE_SUSPENDED**, используя следующую команду: placeholder
-			2. Запись полезной нагрузки: placeholder
-			3. Возобновление процесса с помощью **ResumeThread**: placeholder
+			1. AgentTesla создает  процесс `RegSvcs.exe` с флагом **CREATE_SUSPENDED**, используя следующую команду: placeholder  
+			2. Запись полезной нагрузки: placeholder  
+			3. Возобновление процесса с помощью **ResumeThread**: placeholder  
 
 - Извлечение конфигурации
 		С помощью HollowsHunter из процесса **RegSvcs.exe** извлечена сборка .NET. В dnSpy отображаются классы и функции сборки в обфусцированном виде.
