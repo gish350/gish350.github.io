@@ -77,8 +77,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "a4a1e2fc6329fe68",
@@ -165,18 +164,19 @@
   },
   "active": "270ce2a893f153ee",
   "lastOpenFiles": [
+    "().md",
+    "content/posts/Анализ AgentTesla.md",
+    "static/aget_tesla.drawio.png",
+    "public/aget_tesla.drawio.png",
+    "aget_tesla.drawio (1) 1.png",
+    "aget_tesla.drawio (1).png",
     "Screenshot from 2025-01-25 13-33-23.png",
     "static/flat.png",
     "public/flat.png",
-    "content/posts/Анализ AgentTesla.md",
     "flat.png",
     "Screenshot.md",
     "public/flatt.png",
     "public/flattened.png",
-    "public/Screenshot from 2025-01-22 19-46-01 (1).png",
-    "public/Animation.gif",
-    "static/Animation.gif",
-    "Animation.gif",
     "content/posts/tutorial_kvm.md",
     "public/posts/анализ-agenttesla/index.html",
     "public/posts/анализ-agenttesla",
