@@ -330,15 +330,20 @@
 <ul>
 <li>
 <p>Отладка в x32dbg:</p>
-<ol>
-<li>Проверка <strong>IsDebuggerPresent</strong>, после чего выводится сообщение: <em>&ldquo;This is a third-party compiled AutoIt Script.&rdquo;</em>!<br>
-<img src="/screen.png" alt="Screenshot from 2025-01-25 19-46-09.png"></li>
+<ul>
+<li>Проверка <strong>IsDebuggerPresent</strong>, после чего выводится сообщение: <em>&ldquo;This is a third-party compiled AutoIt Script.&rdquo;</em>!</li>
+</ul>
+<p><img src="/screen.png" alt="Screenshot from 2025-01-25 19-46-09.png|500">  <em>Рисунок 1. Вывод сообщения после  IsDebuggerPresent</em></p>
+<ul>
 <li>Process hollowing:
-Создание легетимного процесса<br>
-1. AgentTesla создает  процесс <code>RegSvcs.exe</code> с флагом <strong>CREATE_SUSPENDED</strong>, используя следующую команду: placeholder<br>
-2. Запись полезной нагрузки: placeholder<br>
-3. Возобновление процесса с помощью <strong>ResumeThread</strong>: placeholder</li>
-</ol>
+<ul>
+<li>Создание легетимного процесса</li>
+<li>AgentTesla создает  процесс <code>RegSvcs.exe</code> с флагом <strong>CREATE_SUSPENDED</strong>, используя следующую команду: placeholder</li>
+<li>Запись полезной нагрузки: placeholder</li>
+<li>Возобновление процесса с помощью <strong>ResumeThread</strong>: placeholder</li>
+</ul>
+</li>
+</ul>
 </li>
 <li>
 <p>Извлечение конфигурации
@@ -559,11 +564,16 @@
 <ol start="4">
 <li>переход в п.2<br>
 <img src="/aget_tesla.drawio.png" alt="Подпись"><br>
+<em>Рисунок 2. IL - представление обфусцированного кода</em><br>
+[PLACEHOLDER]<br>
+[PLACEHOLDER]<br>
+[PLACEHOLDER<br>
 Результат</li>
 </ol>
 </li>
 </ul>
-<p><img src="/flat.png" alt="flat.png"></p>
+<p><img src="/flat.png" alt="flat.png">
+<em>Рисунок 3. Результат применения деобфускации</em></p>
 <h2 id="цепочка-заражения">Цепочка заражения</h2>
 <p>Placeholder</p>
 <h2 id="indicators-of-compromise">Indicators of Compromise</h2>

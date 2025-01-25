@@ -93,13 +93,15 @@ AgentTesla — это тип вредоносного ПО, известный �
 **3. Отладка**
 
 - Отладка в x32dbg:
-	1. Проверка **IsDebuggerPresent**, после чего выводится сообщение: *"This is a third-party compiled AutoIt Script."*!  
-![Screenshot from 2025-01-25 19-46-09.png](/screen.png)
-	3. Process hollowing:
-		Создание легетимного процесса  
-			1. AgentTesla создает  процесс `RegSvcs.exe` с флагом **CREATE_SUSPENDED**, используя следующую команду: placeholder  
-			2. Запись полезной нагрузки: placeholder  
-			3. Возобновление процесса с помощью **ResumeThread**: placeholder  
+	- Проверка **IsDebuggerPresent**, после чего выводится сообщение: *"This is a third-party compiled AutoIt Script."*!  
+	
+	
+	![Screenshot from 2025-01-25 19-46-09.png|500](/screen.png)  *Рисунок 1. Вывод сообщения после  IsDebuggerPresent*
+	- Process hollowing:  
+		- Создание легетимного процесса  
+		- AgentTesla создает  процесс `RegSvcs.exe` с флагом **CREATE_SUSPENDED**, используя следующую команду: placeholder  
+		- Запись полезной нагрузки: placeholder  
+		- Возобновление процесса с помощью **ResumeThread**: placeholder  
 
 - Извлечение конфигурации
 		С помощью HollowsHunter из процесса **RegSvcs.exe** извлечена сборка .NET. В dnSpy отображаются классы и функции сборки в обфусцированном виде.
@@ -280,9 +282,14 @@ AgentTesla — это тип вредоносного ПО, известный �
 		- num = новое число  
 	4. переход в п.2   
 ![Подпись](/aget_tesla.drawio.png)  
+*Рисунок 2. IL - представление обфусцированного кода*  
+[PLACEHOLDER]  
+[PLACEHOLDER]  
+[PLACEHOLDER  
 Результат
 
 ![flat.png](/flat.png)
+*Рисунок 3. Результат применения деобфускации*  
 ## Цепочка заражения
 Placeholder
 ## Indicators of Compromise

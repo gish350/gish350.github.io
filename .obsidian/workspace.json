@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/about.md",
+                "file": "content/posts/Анализ AgentTesla.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "about"
+              "title": "Анализ AgentTesla"
             }
           }
         ]
@@ -164,6 +164,7 @@
   },
   "active": "270ce2a893f153ee",
   "lastOpenFiles": [
+    "content/about.md",
     "public/pirates.jpg",
     "static/pirates.jpg",
     "eoVXtsVp6D4.jpg",
@@ -172,7 +173,6 @@
     "public/untitled/index.html",
     "public/untitled",
     "content/posts/Анализ AgentTesla.md",
-    "content/about.md",
     "static/aget_tesla.drawio.png",
     "public/screen.png",
     "static/screen.png",
@@ -181,7 +181,6 @@
     "().md",
     "public/aget_tesla.drawio.png",
     "aget_tesla.drawio (1) 1.png",
-    "aget_tesla.drawio (1).png",
     "Screenshot.md",
     "content/posts/tutorial_kvm.md",
     "public/posts/анализ-agenttesla/index.html",
