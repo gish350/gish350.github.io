@@ -6,7 +6,408 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ru</language>
     <copyright>Some copyright notice - [my license](https://example.com/license)</copyright>
-    <lastBuildDate>Thu, 11 Jul 2024 21:14:26 +1000</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" /><icon>http://localhost:1313/logo.svg</icon>
+    <lastBuildDate>Sun, 04 Aug 2024 21:14:26 +1000</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" /><icon>http://localhost:1313/logo.svg</icon>
+    
+    
+    <item>
+      <title>Анализ AgentTesla</title>
+      <link>http://localhost:1313/posts/%D0%B0%D0%BD%D0%B0%D0%BB%D0%B8%D0%B7-agenttesla/</link>
+      <pubDate>Sun, 04 Aug 2024 21:14:26 +1000</pubDate>
+      
+      <guid>http://localhost:1313/posts/%D0%B0%D0%BD%D0%B0%D0%BB%D0%B8%D0%B7-agenttesla/</guid>
+      <description><![CDATA[<h2 id="введение">Введение</h2>
+<p>AgentTesla — это тип вредоносного ПО, известный как Remote Access Trojan (RAT) и кейлоггер. Оно активно используется злоумышленниками для кражи конфиденциальной информации с заражённых систем.</p>
+<h2 id="общие-сведения">Общие сведения</h2>
+<p><strong>1. Тип:</strong> Remote Access Trojan (RAT) и кейлоггер</p>
+<p><strong>2. Основные характеристики:</strong></p>
+<ul>
+<li><strong>Шпионские возможности:</strong> AgentTesla способен перехватывать и записывать нажатия клавиш, делать скриншоты, захватывать буфер обмена и собирать данные из различных приложений.</li>
+<li><strong>Кража данных:</strong> Вредоносное ПО часто нацелено на кражу данных аутентификации из веб-браузеров, почтовых клиентов и других приложений.</li>
+<li><strong>Удалённое управление:</strong> AgentTesla позволяет злоумышленникам удалённо управлять заражённой системой, выполняя команды и действия на целевом устройстве.</li>
+</ul>
+<p><strong>3. Распространение:</strong></p>
+<ul>
+<li><strong>Фишинговые атаки:</strong> AgentTesla часто распространяется через фишинговые электронные письма, содержащие вредоносные вложения или ссылки.</li>
+<li><strong>Эксплоиты:</strong> Использование уязвимостей в программном обеспечении для загрузки и выполнения вредоносного кода.</li>
+<li><strong>Социальная инженерия:</strong> Злоумышленники могут использовать методы социальной инженерии для обмана пользователей с целью установки вредоносного ПО.</li>
+</ul>
+<p><strong>4. Вектор атаки:</strong></p>
+<ul>
+<li><strong>Вложения в электронных письмах:</strong> Вредоносные документы, такие как файлы Word или Excel с вредоносными макросами, или архивы, содержащие вредоносные исполняемые файлы.</li>
+<li><strong>Ссылки на вредоносные сайты:</strong> Ссылки в письмах, ведущие на сайты, которые автоматически загружают и запускают AgentTesla.</li>
+</ul>
+<p><strong>5. Функции и возможности:</strong></p>
+<ul>
+<li><strong>Кейлоггер:</strong> Записывает все нажатия клавиш, что позволяет злоумышленникам захватывать пароли и другую конфиденциальную информацию.</li>
+<li><strong>Скриншоты:</strong> Делает скриншоты экрана заражённого компьютера.</li>
+<li><strong>Сетевые данные:</strong> Собирает данные о сетевой активности, включая информацию о подключениях и передаваемых данных.</li>
+<li><strong>Данные из приложений:</strong> Извлечение данных из  веб-браузеров (Chrome, Firefox, Internet Explorer), почтовых клиентов (Outlook, Thunderbird) и других приложений.</li>
+<li><strong>Экфильтрация данных:</strong> Передача собранных данных на удалённый сервер злоумышленников через различные протоколы, включая SMTP, FTP и HTTP.</li>
+</ul>
+<h2 id="статический-анализ">Статический анализ</h2>
+<p>Даннные, полученые в DIE:</p>
+<p><strong>1. Структура файла</strong>
+<strong>Размер файла:</strong> 1.01 МБ<br>
+<strong>Тип файла:</strong> PE (Portable Executable)<br>
+<strong>Компилятор</strong>: AutoIt(3.XX)
+<strong>Хэш SHA-256:</strong> D4C4EE49A5CE076550C8305FCD63FE86707A251A2CA7D47C67D0DBEF66B2A1E3</p>
+<p><strong>2. Секции файла</strong></p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Size</th>
+<th>Entropy</th>
+<th>Status</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>00000000</td>
+<td>00000400</td>
+<td>2.93857</td>
+<td>not packed</td>
+<td>PE Header</td>
+</tr>
+<tr>
+<td>00000400</td>
+<td>0008e000</td>
+<td>6.67525</td>
+<td>packed</td>
+<td>Section(0)[&rsquo;.text']</td>
+</tr>
+<tr>
+<td>0008e400</td>
+<td>0002fe00</td>
+<td>5.76325</td>
+<td>not packed</td>
+<td>Section(1)[&rsquo;.rdata']</td>
+</tr>
+<tr>
+<td>000be200</td>
+<td>00005200</td>
+<td>1.19645</td>
+<td>not packed</td>
+<td>Section(2)[&rsquo;.data']</td>
+</tr>
+<tr>
+<td>000c3400</td>
+<td>00038400</td>
+<td>7.78357</td>
+<td>packed</td>
+<td>Section(3)[&rsquo;.rsrc']</td>
+</tr>
+<tr>
+<td>000fb800</td>
+<td>00007200</td>
+<td>6.78400</td>
+<td>packed</td>
+<td>Section(4)[&rsquo;.reloc']</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2. Структура и импортируемые библиотеки</strong></p>
+<p>Библиотеки:</p>
+<ul>
+<li>placeholder</li>
+</ul>
+<p><strong>3. Основные функции и их анализ</strong></p>
+<p>Основные функции:</p>
+<ul>
+<li>placeholder</li>
+</ul>
+<p><strong>4. Анализ строк и конфигурационных данных</strong></p>
+<p>Строки:</p>
+<ul>
+<li>placeholder</li>
+</ul>
+<p>Конфигурационный блок:</p>
+<ul>
+<li>placeholder</li>
+</ul>
+<p><strong>5. Обфускация</strong></p>
+<p>Методы обфускации:</p>
+<ul>
+<li>Исполняемый файл упакован с помощью AutoIt и обфусцирован. С помощью AutoItRipper была извлечена обфусцированная конфигурация.</li>
+</ul>
+<h2 id="динамический-анализ">Динамический анализ</h2>
+<p><strong>1. Сетевая активность</strong></p>
+<ul>
+<li>placeholder</li>
+</ul>
+<p><strong>2. Файловые операции</strong></p>
+<ul>
+<li>placeholder</li>
+</ul>
+<p><strong>3. Отладка</strong></p>
+<ul>
+<li>
+<p>Отладка в x32dbg:</p>
+<ol>
+<li>Проверка <strong>IsDebuggerPresent</strong>, после чего выводится сообщение: <em>&ldquo;This is a third-party compiled AutoIt Script.&rdquo;</em>!<br>
+<img src="/screen.png" alt="Screenshot from 2025-01-25 19-46-09.png"></li>
+<li>Process hollowing:
+Создание легетимного процесса<br>
+1. AgentTesla создает  процесс <code>RegSvcs.exe</code> с флагом <strong>CREATE_SUSPENDED</strong>, используя следующую команду: placeholder<br>
+2. Запись полезной нагрузки: placeholder<br>
+3. Возобновление процесса с помощью <strong>ResumeThread</strong>: placeholder</li>
+</ol>
+</li>
+<li>
+<p>Извлечение конфигурации
+С помощью HollowsHunter из процесса <strong>RegSvcs.exe</strong> извлечена сборка .NET. В dnSpy отображаются классы и функции сборки в обфусцированном виде.</p>
+</li>
+<li>
+<p>Отладка извлеченной сборки в dnSpy</p>
+<ol>
+<li>
+<p>Настройка HTTPS соединения</p>
+<ul>
+<li>
+<p>Установка поддерживаемых протоколов (SSL 3.0, TLS 1.0, TLS 1.1, TLS 1.2)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (num == <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	ServicePointManager.SecurityProtocol = (SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12);
+</span></span><span style="display:flex;"><span>	num = <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p>Устанавливается делегат, который всегда возвращает true, подтверждая любую проверку сертификатов.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span> <span style="color:#66d9ef">if</span> (num == <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Delegate serverCertificateValidationCallback = ServicePointManager.ServerCertificateValidationCallback;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (TIih8WcH.CS<span style="color:#960050;background-color:#1e0010">$</span>&lt;&gt;<span style="color:#ae81ff">9__</span>CachedAnonymousMethodDelegate1 == <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		TIih8WcH.CS<span style="color:#960050;background-color:#1e0010">$</span>&lt;&gt;<span style="color:#ae81ff">9__</span>CachedAnonymousMethodDelegate1 = <span style="color:#66d9ef">new</span> RemoteCertificateValidationCallback(TIih8WcH.jgbfREqD);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	ServicePointManager.ServerCertificateValidationCallback = (RemoteCertificateValidationCallback)Delegate.Combine(serverCertificateValidationCallback, TIih8WcH.CS<span style="color:#960050;background-color:#1e0010">$</span>&lt;&gt;<span style="color:#ae81ff">9__</span>CachedAnonymousMethodDelegate1);
+</span></span><span style="display:flex;"><span>	num = <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p>Функция проверки сертификатов</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">bool</span> jgbfREqD(<span style="color:#66d9ef">object</span> mUnuRbJ3, X509Certificate yGOKueQ, X509Chain frxz, SslPolicyErrors WSz)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> num = <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (num == <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			num = <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">while</span> (num != <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p>Завершение всех процессов, кроме текущего</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">string</span> processName = Process.GetCurrentProcess().ProcessName;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">int</span> id = Process.GetCurrentProcess().Id;
+</span></span><span style="display:flex;"><span>		Process processesByName = Process.GetProcessesByName(processName);
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">foreach</span> (Process process <span style="color:#66d9ef">in</span> processesByName)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (process.Id != id)
+</span></span><span style="display:flex;"><span>			{
+</span></span><span style="display:flex;"><span>				process.Kill();
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span></code></pre></div></li>
+<li>
+<p>Генерация идентификатора машины</p>
+<ul>
+<li>
+<p>Функция вызывает другие функции для получения серийного номера материнской платы, идентификатора процессора и MAC-адреса сетевого адаптера. Затем она объединяет их и вычисляет MD5-хэш от этой строки. В случае ошибки возвращается строка &ldquo;None&rdquo;.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>text = fHfXQzVTqo.ouKT(MD5.Create(), fHfXQzVTqo.wENtroM1A() + fHfXQzVTqo.gwVUs7kYe() + fHfXQzVTqo.kz1WOlEk7TS());
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p>Настройка автозагрузки</p>
+<ul>
+<li>Получение пути к загруженному файлу сборки</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>Stu4Un2.AsmFilePath = Assembly.GetExecutingAssembly().Location;
+</span></span></code></pre></div><ul>
+<li>Получение пути до директории хранения данных приложения (окружение + имя поддиректории)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span> Stu4Un2.StartupDirectoryPath = Path.Combine(Environment.GetEnvironmentVariable(Stu4Un2.StartupEnvName), Stu4Un2.StartupDirectoryName);
+</span></span></code></pre></div><ul>
+<li>Получение полного пути к файлу автозапуска</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>Stu4Un2.AppStartupFullPath = Path.Combine(Stu4Un2.StartupDirectoryPath, Stu4Un2.StartupInstallationName);
+</span></span></code></pre></div></li>
+<li>
+<p>Взаимодействие с C2</p>
+<ul>
+<li>Формирование строки &ldquo;ИмяПользователя/ИмяКомпьютера&rdquo;</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>	Stu4Un2.ThisComputerName = SystemInformation.UserName + <span style="color:#e6db74">&#34;/&#34;</span> + SystemInformation.ComputerName;
+</span></span></code></pre></div><ul>
+<li>Создание и настройка веб-запроса
+<ul>
+<li>Выполняется GET-запрос к &ldquo;<a href="https://api.ipify.org">https://api.ipify.org</a>&rdquo;, и возвращает содержимое ответа в виде строки. Если запрос успешен и сервер вернул статус &ldquo;OK&rdquo;, то возвращается тело ответа. В противном случае возвращается пустая строка.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(Stu4Un2.IpApi);
+</span></span><span style="display:flex;"><span>httpWebRequest.Credentials = CredentialCache.DefaultCredentials;
+</span></span><span style="display:flex;"><span>httpWebRequest.KeepAlive = <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>httpWebRequest.Timeout = <span style="color:#ae81ff">10000</span>;
+</span></span><span style="display:flex;"><span>httpWebRequest.AllowAutoRedirect = <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>httpWebRequest.MaximumAutomaticRedirections = <span style="color:#ae81ff">50</span>;
+</span></span><span style="display:flex;"><span>httpWebRequest.Method = <span style="color:#e6db74">&#34;GET&#34;</span>;
+</span></span><span style="display:flex;"><span>httpWebRequest.UserAgent = Stu4Un2.PublicUserAgent;
+</span></span></code></pre></div></li>
+<li>
+<p>Проверки на песочницу</p>
+<ul>
+<li>Проверка наличия отладчика</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>n1uhLjf.CheckRemoteDebuggerPresent(Process.GetCurrentProcess().Handle, <span style="color:#66d9ef">ref</span> flag);
+</span></span></code></pre></div><ul>
+<li>Проверка, находится ли IP-адрес компьютера в диапазоне хостинг-провайдеров</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">string</span> text = <span style="color:#66d9ef">new</span> WebClient().DownloadString(<span style="color:#e6db74">&#34;http://ip-api.com/line/?fields=hosting&#34;</span>);
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> text.Contains(<span style="color:#e6db74">&#34;true&#34;</span>);
+</span></span></code></pre></div></li>
+<li>
+<p>Проверки времени сна</p>
+<ul>
+<li>Некоторые виртуализированные среды и песочницы пытаются замедлить выполнение программы, чтобы затруднить анализ её поведения. Например, они могут искусственно увеличивать время, необходимое для выполнения команд, чтобы имитировать реальную производительность. Если система замедлит выполнение команды Sleep(10), но не учтет реального времени, то произойдет расхождение во времени, и метод выявит это несоответствие.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> ticks = DateTime.Now.Ticks;
+</span></span><span style="display:flex;"><span>Thread.Sleep(<span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (DateTime.Now.Ticks - ticks &lt; <span style="color:#ae81ff">10L</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p>Проверка модулей в памяти, связанных с виртуализацией</p>
+<ul>
+<li>SbieDll.dll (VmWare)</li>
+<li>Snxhk.dll, Cmdvrt32.dll (Hyper-V)</li>
+<li>Cmdvrt32.dll (Windows-Server)</li>
+<li>Sf2.dll (IO)</li>
+</ul>
+</li>
+<li>
+<p>Проверки производителя компьютера и видеокарты</p>
+<ul>
+<li>Поиск объектов ManagementObjectSearcher:</li>
+<li>В цикле выполняется поиск объектов ManagementObjectSearcher, которые соответствуют компьютерам, работающим в виртуализированной среде или песочнице.</li>
+<li>Проверка производителей и моделей:
+<ul>
+<li>Для каждого найденного объекта проверяется, содержит ли его производитель строку &ldquo;Microsoft Corporation&rdquo; и модель &ldquo;VIRTUAL&rdquo;. Если это так, метод возвращает true, указывающий на работу в виртуализированной среде.</li>
+<li>Также проверяется наличие производителей &ldquo;VMware&rdquo; и моделей &ldquo;VirtualBox&rdquo;.</li>
+</ul>
+</li>
+<li>Проверка видеокарт:</li>
+<li>Если объекты имеют названия, содержащие &ldquo;VMware&rdquo; или &ldquo;VBox&rdquo;, метод возвращает true, предполагающий работу в виртуализированной среде.</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>	    managementObjectSearcher = <span style="color:#66d9ef">new</span> ManagementObjectSearcher(<span style="color:#e6db74">&#34;Select * from Win32_ComputerSystem&#34;</span>);
+</span></span><span style="display:flex;"><span>	  	<span style="color:#66d9ef">using</span> (ManagementObjectCollection managementObjectCollection = managementObjectSearcher.Get())
+</span></span><span style="display:flex;"><span>				{
+</span></span><span style="display:flex;"><span>					<span style="color:#66d9ef">foreach</span> (ManagementBaseObject managementBaseObject <span style="color:#66d9ef">in</span> managementObjectCollection)
+</span></span><span style="display:flex;"><span>					{
+</span></span><span style="display:flex;"><span>						<span style="color:#66d9ef">if</span> ((managementBaseObject[<span style="color:#e6db74">&#34;Manufacturer&#34;</span>].ToString().ToLower() == <span style="color:#e6db74">&#34;microsoft corporation&#34;</span> &amp;&amp; managementBaseObject[<span style="color:#e6db74">&#34;Model&#34;</span>].ToString().ToUpperInvariant().Contains(<span style="color:#e6db74">&#34;VIRTUAL&#34;</span>)) || managementBaseObject[<span style="color:#e6db74">&#34;Manufacturer&#34;</span>].ToString().ToLower().Contains(<span style="color:#e6db74">&#34;vmware&#34;</span>) || managementBaseObject[<span style="color:#e6db74">&#34;Model&#34;</span>].ToString() == <span style="color:#e6db74">&#34;VirtualBox&#34;</span>)
+</span></span><span style="display:flex;"><span>						{
+</span></span><span style="display:flex;"><span>							<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>						}
+</span></span><span style="display:flex;"><span>					}
+</span></span><span style="display:flex;"><span>				}
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">catch</span>
+</span></span><span style="display:flex;"><span>			{
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">finally</span>
+</span></span><span style="display:flex;"><span>			{
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">if</span> (managementObjectSearcher != <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>				{
+</span></span><span style="display:flex;"><span>					((IDisposable)managementObjectSearcher).Dispose();
+</span></span><span style="display:flex;"><span>				}
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">foreach</span> (ManagementBaseObject managementBaseObject2 <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">new</span> ManagementObjectSearcher(<span style="color:#e6db74">&#34;root\\CIMV2&#34;</span>, <span style="color:#e6db74">&#34;SELECT * FROM Win32_VideoController&#34;</span>).Get())
+</span></span><span style="display:flex;"><span>			{
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">if</span> (managementBaseObject2.GetPropertyValue(<span style="color:#e6db74">&#34;Name&#34;</span>).ToString().Contains(<span style="color:#e6db74">&#34;VMware&#34;</span>) &amp;&amp; managementBaseObject2.GetPropertyValue(<span style="color:#e6db74">&#34;Name&#34;</span>).ToString().Contains(<span style="color:#e6db74">&#34;VBox&#34;</span>))
+</span></span><span style="display:flex;"><span>				{
+</span></span><span style="display:flex;"><span>					<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>				}
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span></code></pre></div><p>Далее, перейдя в класс <strong>qXK</strong>, обфускация сильно увеличилась:</p>
+<p><img src="/Animation.gif" alt="Animation.gif"></p>
+<p>Попытка воспользоваться <strong>de4dot</strong> с его дефолтными параметрами не оказала никакого влияния на код.
+После этого, я наткнулся на  <a href="https://ryan-weil.github.io/posts/AGENT-TESLA-2">статью</a>, в которой описывается написание реализации деобфускатора для  для de4dot.</p>
+<ul>
+<li>Краткое описание метода
+<ul>
+<li>В статье показан процесс &ldquo;выпрямления&rdquo; метода, т.е. избавления от условий и переходов.</li>
+</ul>
+</li>
+<li>Анализ потока управления<br>
+В целом, принцип обфускации этой (и не только, в данной сборке) функции заключается в изменении потока управления и ветвления с помощью if-ов. Общий алгоритм:
+<ol>
+<li>задание начального значения num = 0</li>
+<li>переход к следующей инструкции (условию if)</li>
+<li>проверка, соответвует ли num числу i</li>
+</ol>
+<ul>
+<li>если да, то:
+<ul>
+<li>вход в тело условия</li>
+<li>выполнение инструкции</li>
+<li>num = новое число</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li>переход в п.2<br>
+<img src="/aget_tesla.drawio.png" alt="Подпись"><br>
+Результат</li>
+</ol>
+</li>
+</ul>
+<p><img src="/flat.png" alt="flat.png"></p>
+<h2 id="цепочка-заражения">Цепочка заражения</h2>
+<p>Placeholder</p>
+<h2 id="indicators-of-compromise">Indicators of Compromise</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Категория</th>
+<th style="text-align:center">SHA256</th>
+<th style="text-align:center">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Файлы</td>
+<td style="text-align:center">d4c4ee49a5ce076550c8305fcd63fe86707a251a2ca7d47c67d0dbef66b2a1e3</td>
+<td style="text-align:center">Изначальный ZIP-файл</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mitre-attack-ttps">Mitre Attack TTPs</h2>
+<p>Placeholder</p>
+<h2 id="ссылки">Ссылки</h2>
+<ul>
+<li><a href="https://app.any.run/tasks/ee2f1b8a-8be0-4444-9d1a-fbcb87131191">https://app.any.run/tasks/ee2f1b8a-8be0-4444-9d1a-fbcb87131191</a></li>
+<li><a href="https://bazaar.abuse.ch/sample/d4c4ee49a5ce076550c8305fcd63fe86707a251a2ca7d47c67d0dbef66b2a1e3/">https://bazaar.abuse.ch/sample/d4c4ee49a5ce076550c8305fcd63fe86707a251a2ca7d47c67d0dbef66b2a1e3/</a></li>
+</ul>
+]]></description>
+      
+    </item>
+    
     
     
     <item>
@@ -370,411 +771,6 @@
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo mitmhttp -i &lt;analysis-network-interface&gt; --disable
 </span></span></code></pre></div>]]></description>
-      
-    </item>
-    
-    
-    
-    <item>
-      <title></title>
-      <link>http://localhost:1313/posts/%D0%B0%D0%BD%D0%B0%D0%BB%D0%B8%D0%B7-agenttesla/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/posts/%D0%B0%D0%BD%D0%B0%D0%BB%D0%B8%D0%B7-agenttesla/</guid>
-      <description><![CDATA[<p>hu+++
-title = &lsquo;Анализ AgentTesla&rsquo;
-date = 2024-08-04T21:14:26+10:00
-draft = false
-+++</p>
-<h2 id="введение">Введение</h2>
-<p>AgentTesla — это тип вредоносного ПО, известный как Remote Access Trojan (RAT) и кейлоггер. Оно активно используется злоумышленниками для кражи конфиденциальной информации с заражённых систем.</p>
-<h2 id="общие-сведения">Общие сведения</h2>
-<p><strong>1. Тип:</strong> Remote Access Trojan (RAT) и кейлоггер</p>
-<p><strong>2. Основные характеристики:</strong></p>
-<ul>
-<li><strong>Шпионские возможности:</strong> AgentTesla способен перехватывать и записывать нажатия клавиш, делать скриншоты, захватывать буфер обмена и собирать данные из различных приложений.</li>
-<li><strong>Кража данных:</strong> Вредоносное ПО часто нацелено на кражу данных аутентификации из веб-браузеров, почтовых клиентов и других приложений.</li>
-<li><strong>Удалённое управление:</strong> AgentTesla позволяет злоумышленникам удалённо управлять заражённой системой, выполняя команды и действия на целевом устройстве.</li>
-</ul>
-<p><strong>3. Распространение:</strong></p>
-<ul>
-<li><strong>Фишинговые атаки:</strong> AgentTesla часто распространяется через фишинговые электронные письма, содержащие вредоносные вложения или ссылки.</li>
-<li><strong>Эксплоиты:</strong> Использование уязвимостей в программном обеспечении для загрузки и выполнения вредоносного кода.</li>
-<li><strong>Социальная инженерия:</strong> Злоумышленники могут использовать методы социальной инженерии для обмана пользователей с целью установки вредоносного ПО.</li>
-</ul>
-<p><strong>4. Вектор атаки:</strong></p>
-<ul>
-<li><strong>Вложения в электронных письмах:</strong> Вредоносные документы, такие как файлы Word или Excel с вредоносными макросами, или архивы, содержащие вредоносные исполняемые файлы.</li>
-<li><strong>Ссылки на вредоносные сайты:</strong> Ссылки в письмах, ведущие на сайты, которые автоматически загружают и запускают AgentTesla.</li>
-</ul>
-<p><strong>5. Функции и возможности:</strong></p>
-<ul>
-<li><strong>Кейлоггер:</strong> Записывает все нажатия клавиш, что позволяет злоумышленникам захватывать пароли и другую конфиденциальную информацию.</li>
-<li><strong>Скриншоты:</strong> Делает скриншоты экрана заражённого компьютера.</li>
-<li><strong>Сетевые данные:</strong> Собирает данные о сетевой активности, включая информацию о подключениях и передаваемых данных.</li>
-<li><strong>Данные из приложений:</strong> Извлечение данных из  веб-браузеров (Chrome, Firefox, Internet Explorer), почтовых клиентов (Outlook, Thunderbird) и других приложений.</li>
-<li><strong>Экфильтрация данных:</strong> Передача собранных данных на удалённый сервер злоумышленников через различные протоколы, включая SMTP, FTP и HTTP.</li>
-</ul>
-<h2 id="статический-анализ">Статический анализ</h2>
-<p>Даннные, полученые в DIE:</p>
-<p><strong>1. Структура файла</strong>
-<strong>Размер файла:</strong> 1.01 МБ<br>
-<strong>Тип файла:</strong> PE (Portable Executable)<br>
-<strong>Компилятор</strong>: AutoIt(3.XX)
-<strong>Хэш SHA-256:</strong> D4C4EE49A5CE076550C8305FCD63FE86707A251A2CA7D47C67D0DBEF66B2A1E3</p>
-<p><strong>2. Секции файла</strong></p>
-<table>
-<thead>
-<tr>
-<th>Offset</th>
-<th>Size</th>
-<th>Entropy</th>
-<th>Status</th>
-<th>Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>00000000</td>
-<td>00000400</td>
-<td>2.93857</td>
-<td>not packed</td>
-<td>PE Header</td>
-</tr>
-<tr>
-<td>00000400</td>
-<td>0008e000</td>
-<td>6.67525</td>
-<td>packed</td>
-<td>Section(0)[&rsquo;.text']</td>
-</tr>
-<tr>
-<td>0008e400</td>
-<td>0002fe00</td>
-<td>5.76325</td>
-<td>not packed</td>
-<td>Section(1)[&rsquo;.rdata']</td>
-</tr>
-<tr>
-<td>000be200</td>
-<td>00005200</td>
-<td>1.19645</td>
-<td>not packed</td>
-<td>Section(2)[&rsquo;.data']</td>
-</tr>
-<tr>
-<td>000c3400</td>
-<td>00038400</td>
-<td>7.78357</td>
-<td>packed</td>
-<td>Section(3)[&rsquo;.rsrc']</td>
-</tr>
-<tr>
-<td>000fb800</td>
-<td>00007200</td>
-<td>6.78400</td>
-<td>packed</td>
-<td>Section(4)[&rsquo;.reloc']</td>
-</tr>
-</tbody>
-</table>
-<p><strong>2. Структура и импортируемые библиотеки</strong></p>
-<p>Библиотеки:</p>
-<ul>
-<li>placeholder</li>
-</ul>
-<p><strong>3. Основные функции и их анализ</strong></p>
-<p>Основные функции:</p>
-<ul>
-<li>placeholder</li>
-</ul>
-<p><strong>4. Анализ строк и конфигурационных данных</strong></p>
-<p>Строки:</p>
-<ul>
-<li>placeholder</li>
-</ul>
-<p>Конфигурационный блок:</p>
-<ul>
-<li>placeholder</li>
-</ul>
-<p><strong>5. Обфускация</strong></p>
-<p>Методы обфускации:</p>
-<ul>
-<li>Исполняемый файл упакован с помощью AutoIt и обфусцирован. С помощью AutoItRipper была извлечена обфусцированная конфигурация.</li>
-</ul>
-<h2 id="динамический-анализ">Динамический анализ</h2>
-<p><strong>1. Сетевая активность</strong></p>
-<ul>
-<li>placeholder</li>
-</ul>
-<p><strong>2. Файловые операции</strong></p>
-<ul>
-<li>placeholder</li>
-</ul>
-<p><strong>3. Отладка</strong></p>
-<ul>
-<li>
-<p>Отладка в x64dbg:</p>
-<ol>
-<li>Проверка <strong>IsDebuggerPresent</strong>, после чего выводится сообщение: <em>&ldquo;This is a third-party compiled AutoIt Script.&rdquo;</em></li>
-<li>Process hollowing:
-Создание легетимного процесса<br>
-1. AgentTesla создает  процесс <code>RegSvcs.exe</code> с флагом <strong>CREATE_SUSPENDED</strong>, используя следующую команду: placeholder
-2. Запись полезной нагрузки: placeholder
-3. Возобновление процесса с помощью <strong>ResumeThread</strong>: placeholder</li>
-</ol>
-</li>
-<li>
-<p>Извлечение конфигурации
-С помощью HollowsHunter из процесса <strong>RegSvcs.exe</strong> извлечена сборка .NET. В dnSpy отображаются классы и функции сборки в обфусцированном виде.</p>
-</li>
-<li>
-<p>Отладка извлеченной сборки в dnSpy</p>
-<ol>
-<li>
-<p>Настройка HTTPS соединения</p>
-<ul>
-<li>
-<p>Установка поддерживаемых протоколов (SSL 3.0, TLS 1.0, TLS 1.1, TLS 1.2)</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (num == <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>	ServicePointManager.SecurityProtocol = (SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12);
-</span></span><span style="display:flex;"><span>	num = <span style="color:#ae81ff">2</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div></li>
-<li>
-<p>Устанавливается делегат, который всегда возвращает true, подтверждая любую проверку сертификатов.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span> <span style="color:#66d9ef">if</span> (num == <span style="color:#ae81ff">2</span>)
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>	Delegate serverCertificateValidationCallback = ServicePointManager.ServerCertificateValidationCallback;
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (TIih8WcH.CS<span style="color:#960050;background-color:#1e0010">$</span>&lt;&gt;<span style="color:#ae81ff">9__</span>CachedAnonymousMethodDelegate1 == <span style="color:#66d9ef">null</span>)
-</span></span><span style="display:flex;"><span>	{
-</span></span><span style="display:flex;"><span>		TIih8WcH.CS<span style="color:#960050;background-color:#1e0010">$</span>&lt;&gt;<span style="color:#ae81ff">9__</span>CachedAnonymousMethodDelegate1 = <span style="color:#66d9ef">new</span> RemoteCertificateValidationCallback(TIih8WcH.jgbfREqD);
-</span></span><span style="display:flex;"><span>	}
-</span></span><span style="display:flex;"><span>	ServicePointManager.ServerCertificateValidationCallback = (RemoteCertificateValidationCallback)Delegate.Combine(serverCertificateValidationCallback, TIih8WcH.CS<span style="color:#960050;background-color:#1e0010">$</span>&lt;&gt;<span style="color:#ae81ff">9__</span>CachedAnonymousMethodDelegate1);
-</span></span><span style="display:flex;"><span>	num = <span style="color:#ae81ff">3</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div></li>
-<li>
-<p>Функция проверки сертификатов</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">bool</span> jgbfREqD(<span style="color:#66d9ef">object</span> mUnuRbJ3, X509Certificate yGOKueQ, X509Chain frxz, SslPolicyErrors WSz)
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> num = <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">do</span>
-</span></span><span style="display:flex;"><span>	{
-</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (num == <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>		{
-</span></span><span style="display:flex;"><span>			num = <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>		}
-</span></span><span style="display:flex;"><span>	}
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">while</span> (num != <span style="color:#ae81ff">1</span>);
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div></li>
-</ul>
-</li>
-<li>
-<p>Завершение всех процессов, кроме текущего</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">string</span> processName = Process.GetCurrentProcess().ProcessName;
-</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">int</span> id = Process.GetCurrentProcess().Id;
-</span></span><span style="display:flex;"><span>		Process processesByName = Process.GetProcessesByName(processName);
-</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">foreach</span> (Process process <span style="color:#66d9ef">in</span> processesByName)
-</span></span><span style="display:flex;"><span>		{
-</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (process.Id != id)
-</span></span><span style="display:flex;"><span>			{
-</span></span><span style="display:flex;"><span>				process.Kill();
-</span></span><span style="display:flex;"><span>			}
-</span></span><span style="display:flex;"><span>		}
-</span></span></code></pre></div></li>
-<li>
-<p>Генерация идентификатора машины</p>
-<ul>
-<li>
-<p>Функция вызывает другие функции для получения серийного номера материнской платы, идентификатора процессора и MAC-адреса сетевого адаптера. Затем она объединяет их и вычисляет MD5-хэш от этой строки. В случае ошибки возвращается строка &ldquo;None&rdquo;.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>text = fHfXQzVTqo.ouKT(MD5.Create(), fHfXQzVTqo.wENtroM1A() + fHfXQzVTqo.gwVUs7kYe() + fHfXQzVTqo.kz1WOlEk7TS());
-</span></span></code></pre></div></li>
-</ul>
-</li>
-<li>
-<p>Настройка автозагрузки</p>
-<ul>
-<li>Получение пути к загруженному файлу сборки</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>Stu4Un2.AsmFilePath = Assembly.GetExecutingAssembly().Location;
-</span></span></code></pre></div><ul>
-<li>Получение пути до директории хранения данных приложения (окружение + имя поддиректории)</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span> Stu4Un2.StartupDirectoryPath = Path.Combine(Environment.GetEnvironmentVariable(Stu4Un2.StartupEnvName), Stu4Un2.StartupDirectoryName);
-</span></span></code></pre></div><ul>
-<li>Получение полного пути к файлу автозапуска</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>Stu4Un2.AppStartupFullPath = Path.Combine(Stu4Un2.StartupDirectoryPath, Stu4Un2.StartupInstallationName);
-</span></span></code></pre></div></li>
-<li>
-<p>Взаимодействие с C2</p>
-<ul>
-<li>Формирование строки &ldquo;ИмяПользователя/ИмяКомпьютера&rdquo;</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>	Stu4Un2.ThisComputerName = SystemInformation.UserName + <span style="color:#e6db74">&#34;/&#34;</span> + SystemInformation.ComputerName;
-</span></span></code></pre></div><ul>
-<li>Создание и настройка веб-запроса
-<ul>
-<li>Выполняется GET-запрос к &ldquo;<a href="https://api.ipify.org">https://api.ipify.org</a>&rdquo;, и возвращает содержимое ответа в виде строки. Если запрос успешен и сервер вернул статус &ldquo;OK&rdquo;, то возвращается тело ответа. В противном случае возвращается пустая строка.</li>
-</ul>
-</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(Stu4Un2.IpApi);
-</span></span><span style="display:flex;"><span>httpWebRequest.Credentials = CredentialCache.DefaultCredentials;
-</span></span><span style="display:flex;"><span>httpWebRequest.KeepAlive = <span style="color:#66d9ef">true</span>;
-</span></span><span style="display:flex;"><span>httpWebRequest.Timeout = <span style="color:#ae81ff">10000</span>;
-</span></span><span style="display:flex;"><span>httpWebRequest.AllowAutoRedirect = <span style="color:#66d9ef">true</span>;
-</span></span><span style="display:flex;"><span>httpWebRequest.MaximumAutomaticRedirections = <span style="color:#ae81ff">50</span>;
-</span></span><span style="display:flex;"><span>httpWebRequest.Method = <span style="color:#e6db74">&#34;GET&#34;</span>;
-</span></span><span style="display:flex;"><span>httpWebRequest.UserAgent = Stu4Un2.PublicUserAgent;
-</span></span></code></pre></div></li>
-<li>
-<p>Проверки на песочницу</p>
-<ul>
-<li>Проверка наличия отладчика</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>n1uhLjf.CheckRemoteDebuggerPresent(Process.GetCurrentProcess().Handle, <span style="color:#66d9ef">ref</span> flag);
-</span></span></code></pre></div><ul>
-<li>Проверка, находится ли IP-адрес компьютера в диапазоне хостинг-провайдеров</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">string</span> text = <span style="color:#66d9ef">new</span> WebClient().DownloadString(<span style="color:#e6db74">&#34;http://ip-api.com/line/?fields=hosting&#34;</span>);
-</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> text.Contains(<span style="color:#e6db74">&#34;true&#34;</span>);
-</span></span></code></pre></div></li>
-<li>
-<p>Проверки времени сна</p>
-<ul>
-<li>Некоторые виртуализированные среды и песочницы пытаются замедлить выполнение программы, чтобы затруднить анализ её поведения. Например, они могут искусственно увеличивать время, необходимое для выполнения команд, чтобы имитировать реальную производительность. Если система замедлит выполнение команды Sleep(10), но не учтет реального времени, то произойдет расхождение во времени, и метод выявит это несоответствие.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> ticks = DateTime.Now.Ticks;
-</span></span><span style="display:flex;"><span>Thread.Sleep(<span style="color:#ae81ff">10</span>);
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (DateTime.Now.Ticks - ticks &lt; <span style="color:#ae81ff">10L</span>)
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div></li>
-<li>
-<p>Проверка модулей в памяти, связанных с виртуализацией</p>
-<ul>
-<li>SbieDll.dll (VmWare)</li>
-<li>Snxhk.dll, Cmdvrt32.dll (Hyper-V)</li>
-<li>Cmdvrt32.dll (Windows-Server)</li>
-<li>Sf2.dll (IO)</li>
-</ul>
-</li>
-<li>
-<p>Проверки производителя компьютера и видеокарты</p>
-<ul>
-<li>Поиск объектов ManagementObjectSearcher:</li>
-<li>В цикле выполняется поиск объектов ManagementObjectSearcher, которые соответствуют компьютерам, работающим в виртуализированной среде или песочнице.</li>
-<li>Проверка производителей и моделей:
-<ul>
-<li>Для каждого найденного объекта проверяется, содержит ли его производитель строку &ldquo;Microsoft Corporation&rdquo; и модель &ldquo;VIRTUAL&rdquo;. Если это так, метод возвращает true, указывающий на работу в виртуализированной среде.</li>
-<li>Также проверяется наличие производителей &ldquo;VMware&rdquo; и моделей &ldquo;VirtualBox&rdquo;.</li>
-</ul>
-</li>
-<li>Проверка видеокарт:</li>
-<li>Если объекты имеют названия, содержащие &ldquo;VMware&rdquo; или &ldquo;VBox&rdquo;, метод возвращает true, предполагающий работу в виртуализированной среде.</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>	    managementObjectSearcher = <span style="color:#66d9ef">new</span> ManagementObjectSearcher(<span style="color:#e6db74">&#34;Select * from Win32_ComputerSystem&#34;</span>);
-</span></span><span style="display:flex;"><span>	  	<span style="color:#66d9ef">using</span> (ManagementObjectCollection managementObjectCollection = managementObjectSearcher.Get())
-</span></span><span style="display:flex;"><span>				{
-</span></span><span style="display:flex;"><span>					<span style="color:#66d9ef">foreach</span> (ManagementBaseObject managementBaseObject <span style="color:#66d9ef">in</span> managementObjectCollection)
-</span></span><span style="display:flex;"><span>					{
-</span></span><span style="display:flex;"><span>						<span style="color:#66d9ef">if</span> ((managementBaseObject[<span style="color:#e6db74">&#34;Manufacturer&#34;</span>].ToString().ToLower() == <span style="color:#e6db74">&#34;microsoft corporation&#34;</span> &amp;&amp; managementBaseObject[<span style="color:#e6db74">&#34;Model&#34;</span>].ToString().ToUpperInvariant().Contains(<span style="color:#e6db74">&#34;VIRTUAL&#34;</span>)) || managementBaseObject[<span style="color:#e6db74">&#34;Manufacturer&#34;</span>].ToString().ToLower().Contains(<span style="color:#e6db74">&#34;vmware&#34;</span>) || managementBaseObject[<span style="color:#e6db74">&#34;Model&#34;</span>].ToString() == <span style="color:#e6db74">&#34;VirtualBox&#34;</span>)
-</span></span><span style="display:flex;"><span>						{
-</span></span><span style="display:flex;"><span>							<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
-</span></span><span style="display:flex;"><span>						}
-</span></span><span style="display:flex;"><span>					}
-</span></span><span style="display:flex;"><span>				}
-</span></span><span style="display:flex;"><span>			}
-</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">catch</span>
-</span></span><span style="display:flex;"><span>			{
-</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
-</span></span><span style="display:flex;"><span>			}
-</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">finally</span>
-</span></span><span style="display:flex;"><span>			{
-</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">if</span> (managementObjectSearcher != <span style="color:#66d9ef">null</span>)
-</span></span><span style="display:flex;"><span>				{
-</span></span><span style="display:flex;"><span>					((IDisposable)managementObjectSearcher).Dispose();
-</span></span><span style="display:flex;"><span>				}
-</span></span><span style="display:flex;"><span>			}
-</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">foreach</span> (ManagementBaseObject managementBaseObject2 <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">new</span> ManagementObjectSearcher(<span style="color:#e6db74">&#34;root\\CIMV2&#34;</span>, <span style="color:#e6db74">&#34;SELECT * FROM Win32_VideoController&#34;</span>).Get())
-</span></span><span style="display:flex;"><span>			{
-</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">if</span> (managementBaseObject2.GetPropertyValue(<span style="color:#e6db74">&#34;Name&#34;</span>).ToString().Contains(<span style="color:#e6db74">&#34;VMware&#34;</span>) &amp;&amp; managementBaseObject2.GetPropertyValue(<span style="color:#e6db74">&#34;Name&#34;</span>).ToString().Contains(<span style="color:#e6db74">&#34;VBox&#34;</span>))
-</span></span><span style="display:flex;"><span>				{
-</span></span><span style="display:flex;"><span>					<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
-</span></span><span style="display:flex;"><span>				}
-</span></span><span style="display:flex;"><span>			}
-</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
-</span></span></code></pre></div><p>Далее, перейдя в класс <strong>qXK</strong>, обфускация сильно увеличилась:</p>
-<p><img src="/Animation.gif" alt="Animation.gif"></p>
-<p>Попытка воспользоваться <strong>de4dot</strong> с его дефолтными параметрами не оказала никакого влияния на код.
-После этого, я наткнулся на  <a href="https://ryan-weil.github.io/posts/AGENT-TESLA-2">статью</a>, в которой описывается написание реализации деобфускатора для  для de4dot.</p>
-<ul>
-<li>Краткое описание метода
-<ul>
-<li>В статье показан процесс &ldquo;выпрямления&rdquo; метода, т.е. избавления от условий и переходов.</li>
-</ul>
-</li>
-<li>Анализ потока управления<br>
-В целом, принцип обфускации этой (и не только, в данной сборке) функции заключается в изменении потока управления и ветвления с помощью if-ов. Общий алгоритм:
-<ol>
-<li>задание начального значения num = 0</li>
-<li>переход к следующей инструкции (условию if)</li>
-<li>проверка, соответвует ли num числу i</li>
-</ol>
-<ul>
-<li>если да, то:
-<ul>
-<li>вход в тело условия</li>
-<li>выполнение инструкции</li>
-<li>num = новое число</li>
-</ul>
-</li>
-</ul>
-<ol start="4">
-<li>переход в п.2<br>
-!
-Результат</li>
-</ol>
-</li>
-</ul>
-<p><img src="/flat.png" alt="flat.png"></p>
-<h2 id="цепочка-заражения">Цепочка заражения</h2>
-<p>Placeholder</p>
-<h2 id="indicators-of-compromise">Indicators of Compromise</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Категория</th>
-<th style="text-align:center">SHA256</th>
-<th style="text-align:center">Описание</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">Файлы</td>
-<td style="text-align:center">d4c4ee49a5ce076550c8305fcd63fe86707a251a2ca7d47c67d0dbef66b2a1e3</td>
-<td style="text-align:center">Изначальный ZIP-файл</td>
-</tr>
-</tbody>
-</table>
-<h2 id="mitre-attack-ttps">Mitre Attack TTPs</h2>
-<p>Placeholder</p>
-<h2 id="ссылки">Ссылки</h2>
-<ul>
-<li><a href="https://app.any.run/tasks/ee2f1b8a-8be0-4444-9d1a-fbcb87131191">https://app.any.run/tasks/ee2f1b8a-8be0-4444-9d1a-fbcb87131191</a></li>
-<li><a href="https://bazaar.abuse.ch/sample/d4c4ee49a5ce076550c8305fcd63fe86707a251a2ca7d47c67d0dbef66b2a1e3/">https://bazaar.abuse.ch/sample/d4c4ee49a5ce076550c8305fcd63fe86707a251a2ca7d47c67d0dbef66b2a1e3/</a></li>
-</ul>
-]]></description>
       
     </item>
     
