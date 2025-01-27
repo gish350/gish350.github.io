@@ -5,7 +5,7 @@ $dark_hl_bg:       {{ $colors.dark.hl_bg      | default "#34363b" }};
 $dark_fg:          {{ $colors.dark.fg         | default "white"   }};
 $dark_dim_fg:      {{ $colors.dark.dim_fg     | default "#bababa" }};
 $dark_stroke:      {{ $colors.dark.stroke     | default "#4f4f4f" }};
-$dark_accent:      {{ $colors.dark.accent     | default "#db5793" }};
+$dark_accent:      {{ $colors.dark.accent     | default "#FF0000" }};
 $dark_sidebar_bg:  {{ $colors.dark.sidebar.bg | default "#34363b" }};
 $dark_sidebar_fg:  {{ $colors.dark.sidebar.fg | default "white"   }};
 
@@ -115,8 +115,12 @@ body, html {
     font-size: $base_font_size * $main_font_mult;
     margin: 0;
     padding: 0;
-    background-color: var(--default_bg);
-    color: var(--default_fg);
+    
+    background-image: url("../back.png");
+    background-repeat: repeat; /* Повторение изображения */
+    background-size: 550px, auto, contain;
+    background-position: center; /* Центрирование изображения */
+    
 }
 
 body {
@@ -180,6 +184,9 @@ a.unstyledLink {
 #content {
     @include limitWidth;
     padding: $margin;
+    background-color:  	#303030; /* Черный цвет */
+    border: 4px solid;
+    
 }
 
 footer {
@@ -409,6 +416,7 @@ h6 {font-size: 0.7 * $base_font_size * $title_font_mult;}
     grid-gap: $margin;
     margin-bottom: $margin;
     grid-template-columns: 1fr;
+   
     &.gridView {
         grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
     }
@@ -920,14 +928,17 @@ header {
     > * {
         @include limitWidth;
     }
+    
 }
 header.jumbotronContainer {
     {{ if (.Site.Data.jumbotron.whiteText | default false) }}
         &, *, > * {
             color: white !important;
+            
         }
         #searchbar {
             color: var(--default_fg) !important;
+            
         }
         #main-nav a, .nerdlink:hover {
             color: var(--default_fg) !important;
@@ -947,6 +958,7 @@ header.jumbotronContainer {
                     fill: white !important;
                 }
             }
+            
         }
     {{ end }}
     {{ if (.Site.Data.jumbotron.textShadow | default false) }}
@@ -1050,6 +1062,7 @@ header.jumbotronContainer {
             }
         {{ end }}
     {{ end }}
+    
 }
 .jumbotron {
     width: 100%;
@@ -1083,6 +1096,8 @@ header.jumbotronContainer {
         align-items: center;
         flex-basis: 55%;
         flex-grow: 1;
+        
+        
     }
     img {
         flex-basis: 45%;
@@ -1138,6 +1153,7 @@ header.jumbotronContainer {
         img {
             max-height: 120px;
         }
+        
     }
 }
 {{ end }}
@@ -1244,3 +1260,4 @@ a {
 input {
     transition: .15s border ease-in-out;
 }
+
