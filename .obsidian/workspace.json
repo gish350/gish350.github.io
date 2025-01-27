@@ -11,14 +11,12 @@
             "id": "270ce2a893f153ee",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "content/posts/Анализ AgentTesla.md",
-                "mode": "source",
-                "source": false
+                "file": "static/smile.png"
               },
-              "icon": "lucide-file",
-              "title": "Анализ AgentTesla"
+              "icon": "lucide-image",
+              "title": "smile"
             }
           }
         ]
@@ -164,6 +162,11 @@
   },
   "active": "40895a4b0997e211",
   "lastOpenFiles": [
+    "content/posts/Анализ AgentTesla.md",
+    "static/smile.png",
+    "public/smile.drawio.png",
+    "static/smile.png",
+    "public/smile.png",
     "public/css/styles.057c7150f32b567de6a8a245a5380b948ec894db3fad4464f46bdd1e5ad890744735ed069995bebe31165d74b314349f049ac648c574d60ec51c05c8fcf2e205.css",
     "public/css/styles.8e24b1e672977d55647a49b2fa70bf401a8b6a5c57b47580d495ba20e1147eb431bf7de19db5008f775c19fb1e7c075a6587b762b7619507825457f4d4cb92a7.css",
     "public/css/styles.113365c3052a7efadd10f14752cc529ac0069f5f9a614a986a8a326bf1584ac89a41d381c14042449702f4fd62c98601b115d93cc85d655f3c3edee60b692fef.css",
@@ -174,7 +177,6 @@
     "public/css/styles.325f0617a6507801677d07afa304f8784de166f73322fb8c411d8a7626e0274e42d22304cb78fae6849249488aafcc94db0759d03df6c66c169f590117f58f71.css",
     "public/css/styles.be70dd49c257cc1328499fdb162cc11ebee5729b296d9a61296e9ebb3f3ea34837d0bf94f7e07e64c04946c090f416ad163aa362465f0a41e874c12e25746975.css",
     "public/css/styles.46dd4aa5b62c9710f342a5119031512ca5e9ca486bf53073133b07a421195c0dadcecb865c4ed8f68b4b5c5c3a9a2c640b54f402f4edbd441112f23e0d1ce320.css",
-    "public/css/styles.500349ac49affa3aaf763b8b011713d2bd592c9a3cd933bce6c56a53345c81a2b1ded66d349c25c47eec0b66168816e8f6a7266c3b1dfd9381b3e9cf6e15516a.css",
     "public/back2.png",
     "static/back2.png",
     "public/back.png",
@@ -182,12 +184,7 @@
     "themes/hugo-ficurinia/assets/back.png",
     "themes/hugo-ficurinia/assets/scss/back.png",
     "content/posts/tutorial_kvm.md",
-    "content/posts/Анализ AgentTesla.md",
     "content/about.md",
-    "public/pirates.jpg",
-    "static/pirates.jpg",
-    "eoVXtsVp6D4.jpg",
-    "static/aget_tesla.drawio.png",
     "().md",
     "Screenshot.md"
   ]

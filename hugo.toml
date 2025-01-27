@@ -1,6 +1,6 @@
 baseURL = "https://example.com/"
 theme = "hugo-ficurinia"
-title = "gish350 blog"
+title = "gish350 malware blog"
 languageCode = "ru"
 defaultContentLanguage = "en"
 
@@ -14,8 +14,8 @@ summaryLength = 70  # number of words for article summaries
 
 
 [params]
-    author = "Gabriele Musco"
-    description = "A description for my website"  # this will be added as metadata
+    author = "gish350"
+    description = "⫘⫘⫘⫘⫘⫘"  # this will be added as metadata
 
     posts = "posts"  # content directory where to find home page posts; default searches in "posts" and "post"
     showPostsLink = true  # show or hide the link to the simple post list
@@ -29,12 +29,12 @@ summaryLength = 70  # number of words for article summaries
     homeSinglePage = "/home"
 
     # It's best to put these icons in the "static" folder of your site
-    logo = "/logo.svg"
-    favicon = "/favicon.png"  # 32x32
-    faviconIco = "/favicon.ico"  # 32x32
-    appletouch = "/apple-touch-icon.png"  # 180x180
-    svgicon = "/logo.svg"
-    icon512 = "/icon512.png"  # 512x512 png image
+    logo = "/smile.png"
+    favicon = "/smile.png"  # 32x32
+    faviconIco = "/smile.png"  # 32x32
+    appletouch = "/smile.png"  # 180x180
+    svgicon = "/smile.png"
+    icon512 = "/smile.png"  # 512x512 png image
 
     logoRightOfTitle = false  # positions the logo to the right of the title; default: false
 
