@@ -14,7 +14,7 @@ summaryLength = 70  # number of words for article summaries
 
 
 [params]
-    author = "gish350"
+    author = "WhyNot Inc."
     description = "⫘⫘⫘⫘⫘⫘"  # this will be added as metadata
 
     posts = "posts"  # content directory where to find home page posts; default searches in "posts" and "post"

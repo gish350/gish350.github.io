@@ -1,1 +1,3 @@
+My little blog dedicated to malware investigations...
+
 ![](/pirates.jpg)

@@ -11,12 +11,14 @@
             "id": "270ce2a893f153ee",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "static/smile.png"
+                "file": "content/about.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "smile"
+              "icon": "lucide-file",
+              "title": "about"
             }
           }
         ]
@@ -160,23 +162,22 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "40895a4b0997e211",
+  "active": "270ce2a893f153ee",
   "lastOpenFiles": [
     "content/posts/Анализ AgentTesla.md",
+    "public/css/styles.4cc92ae81178d1d120e7fd9b8d17c0165a358e8c5d28bfd939cae4f37e23674d9fc133d23a7030fbb856d9e348a704aa3d4404e50691c34c47933f7f893023ea.css",
+    "public/css/styles.4ca77e35ad988645552d76ff37ca00d31b0215054462278218cd3d6f37c5979d9a4fac51d89537c1d1f9572d5f0ce0b40ac2f37a250917b6533e699992bba512.css",
+    "public/css/styles.246b266b3f845eb3566c7cc494d5b40e81284cdbf133467e7606fc1ccb26e16e9a59c75c1e128b88be3ffae20d0856d2e4e9831e45ce800bfbfd15e20fafadcf.css",
+    "public/css/styles.ed8de402df0e48f06996b934abebc6122d0354372ee50f22895bf05d5bd23f879295f0afe72aad7428e27c98f988d0362286ff96f8b88c0e61a923ea4e6eb926.css",
+    "public/css/styles.1dc40f08be3490879b40e7c174d20cd4fd32b3a7e9b30252c2a18baa4d1468b2206f29720daa297e945f758bbf7ec1423b4171685069ad0bf7dd6a2fa2fa28cc.css",
+    "public/css/styles.54978fe3f3a11a253a0130a8cc8003ae0c74893cbc7f129075e1bc69fbd36798119332aa89bc7dffc2fc4384c7287cc800428ed2d643563ddb08b965d0a45137.css",
+    "public/css/styles.5e3c0d101c46a954f1045cae365f19cae915e80701d8a1abc2dfb5a2a324e100b0095c6a082d5160a4aac05c16174ef182d1c7ad8cfb59cf43a9dafe2e65122b.css",
+    "public/css/styles.7cf295b83fed8f79efdfe6d0bf9d7056fcd3012e8b29b82a65c40ca899a5a9561113367c8269b333c20afdcad4345a4a3bb16e5d763e63f4baaf66408dccd8b5.css",
+    "public/css/styles.b349ef61173d655d44fbf4947a99e9c1564cab9a18d566aa0f4b0ef62035e08deb24298cf88e57449a44982349fdca611f3ed55f49568865be43e2c1ba619374.css",
+    "public/css/styles.4bfe0c95ee9feb092788c38aee33672492f8fc3bbce58fc98bfac3b06e82bf6f3f895ba10d9a70e4898ae1c532e77e140857cadbcec8902fbc5c93b97a6b66f2.css",
     "static/smile.png",
     "public/smile.drawio.png",
-    "static/smile.png",
     "public/smile.png",
-    "public/css/styles.057c7150f32b567de6a8a245a5380b948ec894db3fad4464f46bdd1e5ad890744735ed069995bebe31165d74b314349f049ac648c574d60ec51c05c8fcf2e205.css",
-    "public/css/styles.8e24b1e672977d55647a49b2fa70bf401a8b6a5c57b47580d495ba20e1147eb431bf7de19db5008f775c19fb1e7c075a6587b762b7619507825457f4d4cb92a7.css",
-    "public/css/styles.113365c3052a7efadd10f14752cc529ac0069f5f9a614a986a8a326bf1584ac89a41d381c14042449702f4fd62c98601b115d93cc85d655f3c3edee60b692fef.css",
-    "public/css/styles.54e4a9a0e13939831fe23b7a3979d67637682240c8bbf646a9fe24e67e60250b03f62cea51b7227a19654f7aff2cf6cd18d550d830f7d449c70aba7793479590.css",
-    "public/css/styles.20de3670e1a8f6b026a95c9fcdd39d76bacdaf20fd3c1265b4222551c112d6a78b0e8f709bdada0c66456f08342f4cd255d6717f573371e9f200845a5c2db5e9.css",
-    "public/css/styles.65656aea9cf7d9a4eb4216331b68e9fa0ebada87f0f6d22c027b164a2ada520cc6348c7680c47a2890bf0e1e5a415ea94b3dee0398aa0177e8520127b3375929.css",
-    "public/css/styles.e4fba20ea6dc0f9074dec6708535793f9d5ae641e32f0a640db50bfec0e2a69b6b2dd7fd93c3c1870b5987e10b8d7317f8e6ec0d4e73b39ebec7d8d48ba8a300.css",
-    "public/css/styles.325f0617a6507801677d07afa304f8784de166f73322fb8c411d8a7626e0274e42d22304cb78fae6849249488aafcc94db0759d03df6c66c169f590117f58f71.css",
-    "public/css/styles.be70dd49c257cc1328499fdb162cc11ebee5729b296d9a61296e9ebb3f3ea34837d0bf94f7e07e64c04946c090f416ad163aa362465f0a41e874c12e25746975.css",
-    "public/css/styles.46dd4aa5b62c9710f342a5119031512ca5e9ca486bf53073133b07a421195c0dadcecb865c4ed8f68b4b5c5c3a9a2c640b54f402f4edbd441112f23e0d1ce320.css",
     "public/back2.png",
     "static/back2.png",
     "public/back.png",
