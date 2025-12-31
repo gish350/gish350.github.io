@@ -1,4 +1,10 @@
-<header class="{{ if .IsHome }}jumbotronContainer{{ end }}">
+{{ $headers := slice 
+    "/images/headers/header1.png"
+    "/images/headers/header2.png"
+}}
+{{ $randomHeader := index (shuffle $headers) 0 }}
+
+<header class="{{ if .IsHome }}jumbotronContainer{{ end }}" style="background-image: url('{{ $randomHeader }}'); background-size: cover; background-position: center;">
     {{- partial "inject/header-before.html" . -}}
     <div class="titleAndSearchContainer">
         <div id="titleContainer">

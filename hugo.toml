@@ -66,7 +66,7 @@ summaryLength = 70  # number of words for article summaries
     menuStyle = "standard"  # changes the style of the main site navigation menu, available styles are: "standard", "buttons"
     inputStyle = "standard" # changes the style of inputs (like the searchbar), available styles are: "standard", "buttons"
 
-    enableSearch = true  # enable search page
+    enableSearch = false  # enable search page
     searchbarEverywhere = true  # if the searchbar should be shown in every page; requires enableSearch
     searchMenuLink = false  # add a search link to the navigation menu; requires enableSearch
     mobileHamburgerNav = false  # alternative hamburger menu layout for the main nav menu when screen is small
