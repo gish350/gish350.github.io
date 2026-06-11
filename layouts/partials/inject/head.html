@@ -312,36 +312,6 @@ main li a:visited {
   color: #551a8b !important;
 }
 
-/* ВЫРАВНИВАНИЕ РАЗМЕРА И ШРИФТА ДЛЯ ВСЕХ УРОВНЕЙ СПИСКОВ */
-.post-content li, 
-.content li, 
-article li, 
-main li, 
-li, 
-li * {
-  /* 1. Жестко фиксируем один аккуратный размер для всех вложенностей */
-  font-size: 18px !important; 
-  
-  /* 2. Принудительно возвращаем стандартный читабельный шрифт Windows 95 */
-  font-family: "MS Sans Serif", "Arial", sans-serif !important;
-  
-  /* 3. Обычная плотность текста (чтобы вложенный текст случайно не становился жирным) */
-  font-weight: normal !important;
-  
-  /* Цвет — строго черный */
-  color: #000000 !important;
-  
-  /* Сбрасываем лишние межстрочные интервалы */
-  line-height: 1.4 !important;
-}
-
-/* Сохраняем жирность ТОЛЬКО для тех тегов, которые вы сознательно выделили (CREATE_SUSPENDED, RegSvcs.exe) */
-.post-content li strong, 
-.content li strong, 
-article li b, 
-main li strong {
-  font-weight: bold !important;
-}
 
 
 
