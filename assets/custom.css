@@ -1,0 +1,76 @@
+/* СТИЛИЗАЦИЯ НАВИГАЦИОННОГО МЕНЮ */
+nav, .nav, .menu, #menu, .navigation-links {
+    display: flex !important;
+    flex-direction: column !important; /* Выстраиваем кнопки вертикально, как на скриншоте */
+    gap: 6px !important; /* Расстояние между кнопками */
+    width: 200px !important; /* Фиксированная ширина меню */
+  }
+  
+  /* Сами кнопки меню */
+  nav a, .nav a, .menu a, #menu a, .navigation-links a {
+    display: block !important;
+    text-align: center !important;
+    padding: 6px 10px !important;
+    font-family: "Arial", sans-serif !important;
+    font-size: 13px !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important; /* Убираем подчеркивание */
+    letter-spacing: 1px !important;
+  
+    /* Желтый текст со скриншота */
+    color: #ffd700 !important; 
+    text-shadow: 1px 1px 0px #000000 !important; /* Черная пиксельная тень букв */
+  
+    /* 3D-Объем в тон вашего сайта: темно-синий металлический градиент */
+    background: linear-gradient(to bottom, #4a75a0 0%, #294666 40%, #172a3f 45%, #0b1521 100%) !important;
+    
+    /* Тонкая рамка + жесткие внутренние тени для эффекта «выпуклого пластика» */
+    border: 1px solid #050a10 !important;
+    box-shadow: 
+      inset 0px 1px 0px rgba(255, 255, 255, 0.4), /* Блик сверху */
+      inset 1px 0px 0px rgba(255, 255, 255, 0.2), /* Блик слева */
+      inset -1px -1px 0px rgba(0, 0, 0, 0.6),     /* Затемнение снизу */
+      0px 2px 3px rgba(0, 0, 0, 0.5) !important;  /* Внешняя тень кнопки */
+  }
+  
+  /* Эффект при наведении (кнопка слегка загорается) */
+  nav a:hover, .nav a:hover, .menu a:hover, #menu a:hover {
+    background: linear-gradient(to bottom, #5b8cb1 0%, #345880 40%, #1f3752 45%, #122233 100%) !important;
+    color: #ffffff !important; /* Текст становится белым при наведении */
+  }
+  
+  /* Эффект при клике (кнопка «вжимается» внутрь экрана) */
+  nav a:active, .nav a:active, .menu a:active, #menu a:active {
+    background: linear-gradient(to bottom, #0b1521 0%, #172a3f 100%) !important;
+    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.8) !important;
+    padding-top: 7px !important; /* Смещение текста вниз на 1px для реалистичности */
+    padding-bottom: 5px !important;
+
+    /* ИСПРАВЛЕНИЕ ДЛИННЫХ ССЫЛОК ВНУТРИ СПИСКОВ И ТЕКСТА */
+article a, main a, li a, p a, .post-content a {
+    /* 1. Автоматический перенос длинных URL-адресов на новую строку */
+    word-break: break-all !important; 
+    word-wrap: break-word !important;
+    white-space: normal !important;
+  
+    /* 2. Настройка цвета: канонический синий цвет интернета 90-х */
+    color: #0000ee !important; 
+    text-decoration: underline !important;
+    
+    /* 3. Оформление */
+    font-family: "MS Sans Serif", "Arial", sans-serif !important;
+    font-size: 13px !important;
+  }
+  
+  /* Цвет уже посещенных ссылок (фиолетовый) */
+  article a:visited, main a:visited, li a:visited, p a:visited {
+    color: #551a8b !important;
+  }
+  
+  /* Эффект при наведении мыши (загорается красным, как в старом HTML) */
+  article a:hover, main a:hover, li a:hover, p a:hover {
+    color: #ff0000 !important;
+  }
+  
+  }

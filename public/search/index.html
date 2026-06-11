@@ -39,7 +39,325 @@
 
     
     
-    <link type="text/css" rel="stylesheet" href=http://localhost:1313/css/styles.4cc92ae81178d1d120e7fd9b8d17c0165a358e8c5d28bfd939cae4f37e23674d9fc133d23a7030fbb856d9e348a704aa3d4404e50691c34c47933f7f893023ea.css integrity="sha512-TMkq6BF40dEg5/2bjRfAFlo1joxdKL/ZOcrk834jZ02fwTPSOnAw&#43;7hW2eNIpwSqPUQE5QaRw0xHkz9/iTAj6g==" />
+    <link type="text/css" rel="stylesheet" href=http://localhost:1313/css/styles.4cc92ae81178d1d120e7fd9b8d17c0165a358e8c5d28bfd939cae4f37e23674d9fc133d23a7030fbb856d9e348a704aa3d4404e50691c34c47933f7f893023ea.css integrity="sha512-TMkq6BF40dEg5/2bjRfAFlo1joxdKL/ZOcrk834jZ02fwTPSOnAw&#43;7hW2eNIpwSqPUQE5QaRw0xHkz9/iTAj6g==" /><style>
+     
+        
+       body {
+       
+      background-color: #11141a !important; 
+      
+       
+      font-family: "MS Sans Serif", "Arial", sans-serif !important;
+      color: #ffffff !important;
+    }
+
+     
+    .post-preview, .article-card, article {
+       
+      background: #c0c0c0 !important;
+      padding: 15px !important;
+      margin-bottom: 25px !important;
+      
+       
+      border-top: 2px solid #ffffff !important;
+      border-left: 2px solid #ffffff !important;
+      border-right: 2px solid #808080 !important;
+      border-bottom: 2px solid #808080 !important;
+      box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.4) !important;  
+    }
+
+    
+     
+    .title, h1.title {
+      font-family: "Times New Roman", Times, serif !important;
+      font-size: 32px !important;
+      font-weight: bold !important;
+      font-style: italic !important;
+      text-transform: none !important;
+      letter-spacing: normal !important;
+      background: none !important;
+      -webkit-text-fill-color: initial !important;
+      color: #000080 !important;  
+      text-shadow: 2px 2px 0px #808080 !important;  
+      filter: none !important;
+    }
+    
+     
+    h1:not(.title), h2, h3, .post-title, .post-title a, h2 a {
+      font-family: "Arial", sans-serif !important;
+      font-size: 20px !important;
+      font-weight: bold !important;
+      text-transform: none !important;
+      letter-spacing: normal !important;
+      background: none !important;
+      -webkit-text-fill-color: initial !important;
+      
+       
+      color: #0000ee !important; 
+      text-decoration: underline !important;
+      text-shadow: none !important;
+      filter: none !important;
+    }
+
+     
+    .post-title a:visited, h2 a:visited {
+      color: #551a8b !important;  
+    }
+    .post-title a:hover, h2 a:hover {
+      color: #ff0000 !important;  
+    }
+
+     
+    p, .post-summary {
+      font-family: "Courier New", Courier, monospace !important;
+      font-size: 14px !important;
+      color: #000000 !important;
+    }
+    
+     
+    footer, .footer, #footer {
+      font-family: "Arial", sans-serif !important;
+      background: #c0c0c0 !important;
+      border-top: 2px solid #808080 !important;  
+      border-bottom: none !important;
+      color: #404040 !important;
+      padding: 10px 0 !important;
+      font-size: 12px !important;
+      letter-spacing: normal !important;
+      text-transform: none !important;
+    }
+     
+nav, .nav, .menu, #menu, .navigation-links {
+  display: flex !important;
+  flex-direction: column !important;  
+  gap: 6px !important;  
+  width: 200px !important;  
+}
+
+ 
+nav a, .nav a, .menu a, #menu a, .navigation-links a {
+  display: block !important;
+  text-align: center !important;
+  padding: 6px 10px !important;
+  font-family: "Arial", sans-serif !important;
+  font-size: 13px !important;
+  font-weight: bold !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;  
+  letter-spacing: 1px !important;
+
+   
+  color: #ffd700 !important; 
+  text-shadow: 1px 1px 0px #000000 !important;  
+
+   
+  background: linear-gradient(to bottom, #4a75a0 0%, #294666 40%, #172a3f 45%, #0b1521 100%) !important;
+  
+   
+  border: 1px solid #050a10 !important;
+  box-shadow: 
+    inset 0px 1px 0px rgba(255, 255, 255, 0.4),  
+    inset 1px 0px 0px rgba(255, 255, 255, 0.2),  
+    inset -1px -1px 0px rgba(0, 0, 0, 0.6),      
+    0px 2px 3px rgba(0, 0, 0, 0.5) !important;   
+}
+
+ 
+nav a:hover, .nav a:hover, .menu a:hover, #menu a:hover {
+  background: linear-gradient(to bottom, #5b8cb1 0%, #345880 40%, #1f3752 45%, #122233 100%) !important;
+  color: #ffffff !important;  
+}
+
+ 
+nav a:active, .nav a:active, .menu a:active, #menu a:active {
+  background: linear-gradient(to bottom, #0b1521 0%, #172a3f 100%) !important;
+  box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.8) !important;
+  padding-top: 7px !important;  
+  padding-bottom: 5px !important;
+}
+nav, .nav, .menu, #menu, .navigation-links {
+  display: flex !important;
+  flex-direction: row !important;  
+  width: 100% !important;          
+  max-width: 600px !important;     
+  gap: 4px !important;             
+  margin-top: 10px !important;
+}
+
+nav a, .nav a, .menu a, #menu a, .navigation-links a {
+  flex: 1 !important;              
+}
+
+* СТИЛИЗАЦИЯ КНОПКИ CONTINUE READING */
+.post-preview a:last-child, 
+a[href*="posts"], 
+a[href*="blog"], 
+.read-more, 
+a:has(text:contains("Continue")) {
+  display: inline-block !important;
+  text-decoration: none !important;  
+  font-family: "Arial", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  padding: 4px 12px !important;
+  margin-top: 15px !important;
+  
+   
+  color: #000000 !important;
+  background-color: #883838 !important;
+  
+   
+  border-top: 2px solid #916666 !important;
+  border-left: 2px solid #ffffff !important;
+  border-right: 2px solid #808080 !important;
+  border-bottom: 2px solid #808080 !important;
+  
+  cursor: pointer !important;
+}
+
+ 
+.post-preview a:last-child:hover, a[href*="posts"]:hover, .read-more:hover {
+  background-color: #d4d4d4 !important;
+  color: #000000 !important;
+}
+
+ 
+.post-preview a:last-child:active, a[href*="posts"]:active, .read-more:active {
+  border-top: 2px solid #808080 !important;
+  border-left: 2px solid #808080 !important;
+  border-right: 2px solid #ffffff !important;
+  border-bottom: 2px solid #ffffff !important;
+  padding-top: 5px !important;  
+  padding-bottom: 3px !important;
+
+  
+}
+
+ 
+.post-preview, .article-card, article, .post-content {
+   
+  color: #000000 !important; 
+}
+
+ 
+.post-preview li, article li, .post-content li {
+  color: #000000 !important;
+}
+
+ 
+.post-preview muted, .post-meta, .meta {
+  color: #404040 !important;  
+}
+
+ 
+.post-preview ul, article ul, .post-content ul {
+  list-style-type: disc !important;  
+  padding-left: 25px !important;     
+  margin-bottom: 10px !important;
+}
+
+.post-preview ol, article ol, .post-content ol {
+  list-style-type: decimal !important;  
+  padding-left: 25px !important;        
+  margin-bottom: 10px !important;
+}
+
+
+
+
+
+ 
+ 
+blockquote, .blockquote, .callout, [class*="tip"], [class*="note"] {
+  background-color: #c0c0c0 !important;  
+  border: 2px inset #ffffff !important;   
+  padding: 10px 15px !important;
+  margin: 15px 0 !important;
+  font-family: "MS Sans Serif", "Arial", sans-serif !important;
+  color: #000000 !important;
+}
+
+ 
+blockquote p:first-child, .callout-title {
+  font-weight: bold !important;
+  color: #000080 !important;  
+  margin-bottom: 5px !important;
+}
+
+ 
+.logo-frame, 
+img[src*="smile.png"],  
+.site-logo {
+  display: block !important;
+  width: 60px !important;   
+  height: 120px !important;
+  margin: 10px !important;  
+  
+   
+  border: 7px solid #5a3d28 !important; 
+  border-image: linear-gradient(135deg, #8b5a2b 0%, #5a3d28 40%, #3e271a 50%, #5a3d28 60%, #8b5a2b 100%) 10 !important;
+  
+   
+  box-shadow: 
+    inset 3px 3px 5px rgba(0, 0, 0, 0.8),     
+    inset -3px -3px 5px rgba(0, 0, 0, 0.5),
+    4px 4px 0px rgba(0, 0, 0, 0.4) !important;  
+    
+  
+  image-rendering: pixelated !important;
+}
+
+
+
+.post-content a, 
+article a, 
+main p a, 
+main li a, 
+.post p a, 
+.post li a {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: initial !important;
+  
+   
+  color: #0000ee !important; 
+  text-decoration: underline !important;
+  display: inline !important;
+  
+   
+  word-break: break-all !important; 
+  word-wrap: break-word !important;
+  white-space: normal !important;
+}
+
+ 
+.post-content a:hover, 
+article a:hover, 
+main p a:hover, 
+main li a:hover,
+.post p a:hover,
+.post li a:hover {
+  color: #ff0000 !important; 
+  background: transparent !important;
+  text-decoration: underline !important;
+}
+
+ 
+.post-content a:visited, 
+article a:visited, 
+main p a:visited, 
+main li a:visited {
+  color: #551a8b !important;
+}
+
+
+
+
+
+</style>
 <meta name="author" content="WhyNot Inc." />
 
     
@@ -300,10 +618,10 @@
     <hr />
 
 <p><small>
-        2025 &copy; Some copyright notice - <a href="https://example.com/license">my license</a>
+        2026 &copy; Far Eastern Systems
     </small></p>
     <p><small>
-        <a href='https://gitlab.com/gabmus/hugo-ficurinia'>Ficurinia theme</a> for <a href='https://gohugo.io'>Hugo</a> by <a href='https://gabmus.org'>Gabriele Musco</a>. Licensed under <a href='https://www.gnu.org/licenses/agpl-3.0.html'>GNU AGPLv3</a>.
+        
     </small></p>
 </footer>
 </div>

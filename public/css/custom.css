@@ -1,0 +1,30 @@
+@import url('https://googleapis.com');
+
+
+
+h1, h2, .post-title, h1 a {
+    font-family: 'Orbitron', monospace !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important;
+    color: #a0a5aa !important;
+    text-shadow: 0px 1px 0px #ffffff; /* Тот самый микро-объем букв */
+  }
+  
+
+  footer, .footer, #footer {
+    font-family: 'Orbitron', monospace !important;
+    font-size: 11px !important;
+    letter-spacing: 3px !important;
+    text-transform: uppercase;
+    
+    
+    background: 
+      linear-gradient(to bottom, #4a75a0 0px, #4a75a0 4px, transparent 4px),
+      linear-gradient(to bottom, #0f1115 0%, #000000 40%, #08090b 100%) !important;
+    
+    border-top: 1px solid #555555 !important;
+    border-bottom: 2px solid #000000 !important;
+    color: #a0a5aa !important;
+    padding: 12px 15px !important;
+  }
+  

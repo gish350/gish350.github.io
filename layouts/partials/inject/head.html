@@ -1,0 +1,319 @@
+<style>
+    /* 1. СТИЛЬ ВСЕГО САЙТА (Windows 95 / Ранний Web) */
+       /* 1. СТИЛЬ ВСЕГО САЙТА (Возвращаем ваш фон + элементы 90-х) */
+       body {
+      /* Убираем стирание фона, чтобы вернуть настройки вашей темы Hugo */
+      background-color: #11141a !important; 
+      
+      /* Основной текст внутри статей делаем белым или светло-серым для читаемости на темном фоне */
+      font-family: "MS Sans Serif", "Arial", sans-serif !important;
+      color: #ffffff !important;
+    }
+
+    /* 2. СТИЛИЗАЦИЯ КАРТОЧЕК СТАТЕЙ (Оставляем объемные серые окна) */
+    .post-preview, .article-card, article {
+      /* Окна остаются серыми, контрастируя с вашим фоном */
+      background: #c0c0c0 !important;
+      padding: 15px !important;
+      margin-bottom: 25px !important;
+      
+      /* Трехмерная фаска Windows 95 */
+      border-top: 2px solid #ffffff !important;
+      border-left: 2px solid #ffffff !important;
+      border-right: 2px solid #808080 !important;
+      border-bottom: 2px solid #808080 !important;
+      box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.4) !important; /* Ретро-тень без размытия */
+    }
+
+    
+    /* 3. НАЗВАНИЕ БЛОГА (В стиле WordArt или старого логотипа) */
+    .title, h1.title {
+      font-family: "Times New Roman", Times, serif !important;
+      font-size: 32px !important;
+      font-weight: bold !important;
+      font-style: italic !important;
+      text-transform: none !important;
+      letter-spacing: normal !important;
+      background: none !important;
+      -webkit-text-fill-color: initial !important;
+      color: #000080 !important; /* Насыщенный темно-синий цвет */
+      text-shadow: 2px 2px 0px #808080 !important; /* Простая тень без размытия */
+      filter: none !important;
+    }
+    
+    /* 4. ЗАГОЛОВКИ СТАТЕЙ (Стандартные ссылки из 90-х) */
+    h1:not(.title), h2, h3, .post-title, .post-title a, h2 a {
+      font-family: "Arial", sans-serif !important;
+      font-size: 20px !important;
+      font-weight: bold !important;
+      text-transform: none !important;
+      letter-spacing: normal !important;
+      background: none !important;
+      -webkit-text-fill-color: initial !important;
+      
+      /*  синий цвет ссылок интернета 90-х с обязательным подчеркиванием */
+      color: #0000ee !important; 
+      text-decoration: underline !important;
+      text-shadow: none !important;
+      filter: none !important;
+    }
+
+    /* Посещенные или зажатые ссылки */
+    .post-title a:visited, h2 a:visited {
+      color: #551a8b !important; /* Родное фиолетовое выделение */
+    }
+    .post-title a:hover, h2 a:hover {
+      color: #ff0000 !important; /* Красный цвет при наведении, как в старом HTML */
+    }
+
+    /* Текст описания статей */
+    p, .post-summary {
+      font-family: "Courier New", Courier, monospace !important;
+      font-size: 14px !important;
+      color: #000000 !important;
+    }
+    
+    /* 5. ПОДВАЛ И МЕНЮ (Простые текстовые разделители) */
+    footer, .footer, #footer {
+      font-family: "Arial", sans-serif !important;
+      background: #c0c0c0 !important;
+      border-top: 2px solid #808080 !important; /* Утопленная линия */
+      border-bottom: none !important;
+      color: #404040 !important;
+      padding: 10px 0 !important;
+      font-size: 12px !important;
+      letter-spacing: normal !important;
+      text-transform: none !important;
+    }
+    /* СТИЛИЗАЦИЯ НАВИГАЦИОННОГО МЕНЮ */
+nav, .nav, .menu, #menu, .navigation-links {
+  display: flex !important;
+  flex-direction: column !important; /* Выстраиваем кнопки вертикально, как на скриншоте */
+  gap: 6px !important; /* Расстояние между кнопками */
+  width: 200px !important; /* Фиксированная ширина меню */
+}
+
+/* Сами кнопки меню */
+nav a, .nav a, .menu a, #menu a, .navigation-links a {
+  display: block !important;
+  text-align: center !important;
+  padding: 6px 10px !important;
+  font-family: "Arial", sans-serif !important;
+  font-size: 13px !important;
+  font-weight: bold !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important; /* Убираем подчеркивание */
+  letter-spacing: 1px !important;
+
+  /* Желтый текст со скриншота */
+  color: #ffd700 !important; 
+  text-shadow: 1px 1px 0px #000000 !important; /* Черная пиксельная тень букв */
+
+  /* 3D-Объем в тон вашего сайта: темно-синий металлический градиент */
+  background: linear-gradient(to bottom, #4a75a0 0%, #294666 40%, #172a3f 45%, #0b1521 100%) !important;
+  
+  /* Тонкая рамка + жесткие внутренние тени для эффекта «выпуклого пластика» */
+  border: 1px solid #050a10 !important;
+  box-shadow: 
+    inset 0px 1px 0px rgba(255, 255, 255, 0.4), /* Блик сверху */
+    inset 1px 0px 0px rgba(255, 255, 255, 0.2), /* Блик слева */
+    inset -1px -1px 0px rgba(0, 0, 0, 0.6),     /* Затемнение снизу */
+    0px 2px 3px rgba(0, 0, 0, 0.5) !important;  /* Внешняя тень кнопки */
+}
+
+/* Эффект при наведении (кнопка слегка загорается) */
+nav a:hover, .nav a:hover, .menu a:hover, #menu a:hover {
+  background: linear-gradient(to bottom, #5b8cb1 0%, #345880 40%, #1f3752 45%, #122233 100%) !important;
+  color: #ffffff !important; /* Текст становится белым при наведении */
+}
+
+/* Эффект при клике (кнопка «вжимается» внутрь экрана) */
+nav a:active, .nav a:active, .menu a:active, #menu a:active {
+  background: linear-gradient(to bottom, #0b1521 0%, #172a3f 100%) !important;
+  box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.8) !important;
+  padding-top: 7px !important; /* Смещение текста вниз на 1px для реалистичности */
+  padding-bottom: 5px !important;
+}
+nav, .nav, .menu, #menu, .navigation-links {
+  display: flex !important;
+  flex-direction: row !important; /* Строго в один ряд */
+  width: 100% !important;         /* Растягиваем контейнер во всю ширину */
+  max-width: 600px !important;    /* Ограничение, чтобы они не были слишком гигантскими */
+  gap: 4px !important;            /* Зазор между ними */
+  margin-top: 10px !important;
+}
+
+nav a, .nav a, .menu a, #menu a, .navigation-links a {
+  flex: 1 !important;             /* заставляет ВСЕ кнопки быть строго одной длины */
+}
+
+* СТИЛИЗАЦИЯ КНОПКИ CONTINUE READING */
+.post-preview a:last-child, 
+a[href*="posts"], 
+a[href*="blog"], 
+.read-more, 
+a:has(text:contains("Continue")) {
+  display: inline-block !important;
+  text-decoration: none !important; /* Убираем стандартное подчеркивание */
+  font-family: "Arial", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  padding: 4px 12px !important;
+  margin-top: 15px !important;
+  
+  /* Цвета: черный текст на классическом сером фоне Windows 95 */
+  color: #000000 !important;
+  background-color: #883838 !important;
+  
+  /* Эффект объемной 3D-кнопки (белый верх-лево, темный низ-право) */
+  border-top: 2px solid #916666 !important;
+  border-left: 2px solid #ffffff !important;
+  border-right: 2px solid #808080 !important;
+  border-bottom: 2px solid #808080 !important;
+  
+  cursor: pointer !important;
+}
+
+/* Эффект при наведении (кнопка слегка подсвечивается) */
+.post-preview a:last-child:hover, a[href*="posts"]:hover, .read-more:hover {
+  background-color: #d4d4d4 !important;
+  color: #000000 !important;
+}
+
+/* Эффект при клике (кнопка физически «вжимается» в экран) */
+.post-preview a:last-child:active, a[href*="posts"]:active, .read-more:active {
+  border-top: 2px solid #808080 !important;
+  border-left: 2px solid #808080 !important;
+  border-right: 2px solid #ffffff !important;
+  border-bottom: 2px solid #ffffff !important;
+  padding-top: 5px !important; /* Сдвиг текста на 1px для реалистичности */
+  padding-bottom: 3px !important;
+
+  
+}
+
+/* ИСПРАВЛЕНИЕ ЧИТАЕМОСТИ ВНУТРИ СЕРЫХ КАРТОЧЕК */
+.post-preview, .article-card, article, .post-content {
+  /* 1. Делаем весь обычный текст и списки строго черными */
+  color: #000000 !important; 
+}
+
+/* Красим все элементы списков (маркеры и цифры) */
+.post-preview li, article li, .post-content li {
+  color: #000000 !important;
+}
+
+/* Красим второстепенный текст (например, даты или подписи), если они сливаются */
+.post-preview muted, .post-meta, .meta {
+  color: #404040 !important; /* Темно-серый */
+}
+
+/* 2. ИСПРАВЛЕНИЕ СПИСКОВ (Возвращаем нормальные отступы и маркеры) */
+.post-preview ul, article ul, .post-content ul {
+  list-style-type: disc !important; /* Круглые маркеры */
+  padding-left: 25px !important;    /* Отступ слева, чтобы точки не вылезали */
+  margin-bottom: 10px !important;
+}
+
+.post-preview ol, article ol, .post-content ol {
+  list-style-type: decimal !important; /* Порядковые номера 1, 2, 3... */
+  padding-left: 25px !important;       /* Отступ слева для цифр */
+  margin-bottom: 10px !important;
+}
+
+
+
+
+
+/* 2. СТИЛИЗАЦИЯ ЗАМЕТКИ [!TIP] В РЕТРО-РАМОЧКУ */
+/* Этот селектор ловит блоки цитат Obsidian callouts */
+blockquote, .blockquote, .callout, [class*="tip"], [class*="note"] {
+  background-color: #c0c0c0 !important; /* Серый цвет Windows 95 */
+  border: 2px inset #ffffff !important;  /* "Утопленная" внутрь рамка */
+  padding: 10px 15px !important;
+  margin: 15px 0 !important;
+  font-family: "MS Sans Serif", "Arial", sans-serif !important;
+  color: #000000 !important;
+}
+
+/* Выделяем заголовок [!TIP] синим цветом, как шапку окна */
+blockquote p:first-child, .callout-title {
+  font-weight: bold !important;
+  color: #000080 !important; /* Синий цвет системного окна */
+  margin-bottom: 5px !important;
+}
+
+/* 1. СТИЛИЗАЦИЯ ДЕРЕВЯННОЙ РАМКИ ДЛЯ ЛОГОТИПА */
+.logo-frame, 
+img[src*="smile.png"], /* Селектор подменяет старый смайлик, если вы загрузите туда эту картинку */
+.site-logo {
+  display: block !important;
+  width: 60px !important;  /* Аккуратный ретро-размер для логотипа */
+  height: 120px !important;
+  margin: 10px !important; /* Центрируем логотип в шапке */
+  
+  /* Имитация деревянного багета через градиенты (коричневые оттенки дерева) */
+  border: 7px solid #5a3d28 !important; 
+  border-image: linear-gradient(135deg, #8b5a2b 0%, #5a3d28 40%, #3e271a 50%, #5a3d28 60%, #8b5a2b 100%) 10 !important;
+  
+  /* Эффект глубоких теней: внутренняя тень на саму картину + жесткая внешняя тень */
+  box-shadow: 
+    inset 3px 3px 5px rgba(0, 0, 0, 0.8),    /* Тень падающая НА рисунок внутри рамки */
+    inset -3px -3px 5px rgba(0, 0, 0, 0.5),
+    4px 4px 0px rgba(0, 0, 0, 0.4) !important; /* Ретро-тень от самой рамки на сайт */
+    
+  
+  image-rendering: pixelated !important;
+}
+
+
+
+.post-content a, 
+article a, 
+main p a, 
+main li a, 
+.post p a, 
+.post li a {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: initial !important;
+  
+  /* Канонический синий цвет интернета 90-х и обязательное подчеркивание */
+  color: #0000ee !important; 
+  text-decoration: underline !important;
+  display: inline !important;
+  
+  /* Автоперенос длинных URL-адресов, чтобы не ломали серые окна */
+  word-break: break-all !important; 
+  word-wrap: break-word !important;
+  white-space: normal !important;
+}
+
+/* Цвет при наведении (строго внутри контента: розовый уходит, загорается красный) */
+.post-content a:hover, 
+article a:hover, 
+main p a:hover, 
+main li a:hover,
+.post p a:hover,
+.post li a:hover {
+  color: #ff0000 !important; 
+  background: transparent !important;
+  text-decoration: underline !important;
+}
+
+/* Цвет уже посещенных ссылок в тексте (классический фиолетовый) */
+.post-content a:visited, 
+article a:visited, 
+main p a:visited, 
+main li a:visited {
+  color: #551a8b !important;
+}
+
+
+
+
+
+</style>

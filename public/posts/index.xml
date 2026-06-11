@@ -5,7 +5,7 @@
     <description>Recent content in Posts on gish350 malware blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ru</language>
-    <copyright>Some copyright notice - [my license](https://example.com/license)</copyright>
+    <copyright>Far Eastern Systems</copyright>
     <lastBuildDate>Sun, 04 Aug 2024 21:14:26 +1000</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" /><icon>http://localhost:1313/smile.png</icon>
     
     
@@ -430,10 +430,7 @@
 <h2 id="сетевая-инфраструктура">Сетевая инфраструктура</h2>
 <p>Возможность обеспечения виртуальной машины для анализа с доступом в интернет является важной составляющей полноценного анализа, поскольку многие современные вредоносные программы используют интернет-соединение для различных целей. Однако предоставление доступа к интернету требует дополнительных мер безопасности для защиты сети.</p>
 <blockquote>
-<p>[!TIP]</p>
-</blockquote>
-<blockquote>
-<p>Следует поместить хост-машину в DMZ. Большинство домашних маршрутизаторов обладают настройками DMZ.</p>
+<p>[!TIP] Следует поместить хост-машину в DMZ. Большинство домашних маршрутизаторов обладают настройками DMZ.</p>
 </blockquote>
 <p>Общая схема сети представлена ниже:</p>
 <pre tabindex="0"><code>  ┌─────────┐
