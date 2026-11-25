@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "styles.css",
-	"sourceRoot": "/home/gish350/malware_blog",
+	"sourceRoot": "/home/gish350/Projects/blog/gish350.github.io",
 	"sources": [
 		"themes/hugo-ficurinia/assets/scss/style.scss"
 	],
