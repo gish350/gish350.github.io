@@ -281,9 +281,12 @@ sudo mkdir /root/.mitmproxy
 
 - Скачаем [VirtIO ISO](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso)
 - Создадим образ диска
+> [!TIP] После установки Windows и всех программ не запускайте этот образ напрямую. Сделайте его эталонным (win10_clean.qcow2) и создайте поверх него рабочий оверлей. Все изменения будут писаться только в win10_work.qcow2, а откат к чистой системе займёт секунду — достаточно пересоздать этот файл.
+
 ```bash
-qemu-img create -f qcow2 windows.qcow2 128G
+qemu-img create -f qcow2 -b win10_clean.qcow2 -F qcow2 win10_work.qcow2
 ```
+	
 * Создадим новую виртуальную машину
 	1. Импортируем существующий образ диска
 	2. Выберем  **windows.qcow2** в качестве хранилища
